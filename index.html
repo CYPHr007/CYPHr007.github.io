@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali G. &mdash; Founder of PILAR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0b;
+            --bg-card: #111113;
+            --bg-card-hover: #18181b;
+            --border: #222225;
+            --text: #e4e4e7;
+            --text-muted: #71717a;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --green: #22c55e;
+            --orange: #f97316;
+            --purple: #a855f7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 11, 0.8);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        nav .logo span {
+            color: var(--accent);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 720px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .hero-tag .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 540px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-card);
+            border-color: var(--text-muted);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        section > p {
+            color: var(--text-muted);
+            max-width: 640px;
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Story Section */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--accent), var(--purple), var(--border));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-item .year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Timeline photos */
+        .timeline-photo {
+            margin-top: 1.2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            max-width: 480px;
+        }
+
+        .timeline-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .timeline-photo:hover img {
+            transform: scale(1.02);
+        }
+
+        .timeline-photo .photo-caption {
+            padding: 0.6rem 1rem;
+            background: var(--bg-card);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* PILAR Section */
+        .pilar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .pilar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .pilar-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .pilar-card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .pilar-card .icon.blue { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); }
+        .pilar-card .icon.green { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); }
+        .pilar-card .icon.orange { background: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.2); }
+        .pilar-card .icon.purple { background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.2); }
+
+        .pilar-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .pilar-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* About cards */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--text-muted);
+        }
+
+        .about-card h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .lang-bar {
+            margin-top: 0.75rem;
+            height: 4px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .lang-bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        /* Tech stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-tag {
+            padding: 0.4rem 0.9rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Connect section */
+        .connect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .connect-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .connect-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .connect-card svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .connect-card .connect-info .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .connect-card .connect-info .handle {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer .footer-line {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            color: #3f3f46;
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            nav .nav-links {
+                gap: 1rem;
+            }
+            nav .nav-links a {
+                font-size: 0.8rem;
+            }
+            .hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+            section {
+                padding: 4rem 1.5rem;
+            }
+            .pilar-grid, .connect-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">ali<span>.</span>dev</div>
+            <ul class="nav-links">
+                <li><a href="#story">Story</a></li>
+                <li><a href="#pilar">PILAR</a></li>
+                <li><a href="#connect">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <div class="hero-tag"><span class="dot"></span>Building the future of industrial maintenance</div>
+            <h1>I'm Ali.<br>Founder of <span class="gradient">PILAR</span>.</h1>
+            <p>18-year-old Moroccan CSE student at CUHK Shenzhen. Former gamer turned founder. Went from knowing nothing about tech to building an industrial AI product, all in under a year.</p>
+            <div class="hero-links">
+                <a href="https://github.com/CYPHr007/PILAR" target="_blank" class="btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    View PILAR on GitHub
+                </a>
+                <a href="#story" class="btn-ghost">Read My Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section id="story">
+        <div class="reveal">
+            <div class="section-label">// my journey</div>
+            <h2>From curiosity to creation</h2>
+            <p>From gaming all day in Morocco to founding a startup in Shenzhen. Here's how it happened.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="year">Morocco</div>
+                <h3>The gamer years</h3>
+                <p>Growing up in El Jadida, Morocco, I had zero connection to the tech world. I was a huge video games player; that was my entire universe. I graduated from a French high school not knowing what a line of code looked like. Tech wasn't even on my radar. But looking back, gaming taught me something: the patience to grind through hard problems and the obsession to get better.</p>
+                <div class="timeline-photo">
+                    <img src="toubkal3.jpg" alt="Ali at the summit of Mount Toubkal at age 16" loading="lazy">
+                    <div class="photo-caption">Summit of Mount Toubkal, 4,167m. I was 16.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="year">The Seed</div>
+                <h3>Internship at Kapachim Maroc</h3>
+                <p>Before I knew anything about code, I did an internship at Kapachim Maroc, a chemical manufacturing plant. I saw the factory floor up close: the machines, the breakdowns, the cost of unplanned downtime. I didn't know it yet, but this experience planted the seed that would later become PILAR. The problem was real, I just didn't have the tools to solve it. Not yet.</p>
+                <div class="timeline-photo">
+                    <img src="IMG-20220331-WA0012.jpg" alt="Ali during his internship at Kapachim Maroc" loading="lazy">
+                    <div class="photo-caption">Internship at Kapachim Maroc. Where the idea for PILAR was born.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="year">The Leap</div>
+                <h3>Leaving home at 18</h3>
+                <p>At 18, I left my parents and everything I knew in Morocco to move to Shenzhen, China, alone, on the other side of the world. No safety net, no connections in tech, barely any Mandarin. I enrolled in Computer Science and Engineering at CUHK Shenzhen. The distance from family was the hardest part, but I knew that if I wanted to build something real, I had to put myself where things are built.</p>
+                <div class="timeline-photo">
+                    <img src="firstdayinsz.jpg" alt="Ali's first day in Shenzhen" loading="lazy">
+                    <div class="photo-caption">First day in Shenzhen. A new chapter.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="year">The Brotherhood</div>
+                <h3>Dorm life and the people who changed everything</h3>
+                <p>I moved into a small dorm room with 3 other students. They became my brothers. When you're far from home, the people around you become your family. We studied together, struggled together, and pushed each other forward. And then there's Rayan, the friend who told me to apply to CUHK Shenzhen in the first place. He introduced me to the tech world, connected me with people in the field, and opened my eyes to the founding and startup ecosystem. I wouldn't be here without him.</p>
+                <div class="timeline-photo">
+                    <img src="rayanmyfriend.jpg" alt="Ali with his friend Rayan" loading="lazy">
+                    <div class="photo-caption">With Rayan. The one who started it all.</div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="year">The Transformation</div>
+                <h3>Zero to everything in under a year</h3>
+                <p>Shenzhen changed everything. In less than a year, I went from someone who had never coded to someone building full-stack apps, training ML models, and writing AI agents. I absorbed everything: Python, web development, machine learning, desktop app packaging, system design. The speed surprised even me. When you're surrounded by innovation and have nothing to fall back on, you learn fast.</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="year">The Build</div>
+                <h3>Creating PILAR</h3>
+                <p>All of it clicked into one idea: what if machines could tell you they were about to break, before they did? That question became PILAR. I mastered generative AI and used it as my superpower: leveraging LLMs to architect the system, build the models, design the interface, and create the AI agents. One person, powered by the right tools, building an industrial-grade product. No funding, no team, just relentless iteration fueled by the same obsessive energy that once went into gaming.</p>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="year">Now</div>
+                <h3>Shipping, studying, and scaling</h3>
+                <p>PILAR is live: a desktop app with local AI agents, offline-first, zero cloud dependency. Built by one person who learned to wield generative AI as a force multiplier. I'm still a CSE student at CUHK Shenzhen, still learning Chinese (the most spoken language in the world), and still building. I speak French, Arabic, and English fluently. The journey from a gamer in Morocco to a startup founder in China happened in under a year, but it's only the beginning.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about">
+        <div class="reveal">
+            <div class="section-label">// about me</div>
+            <h2>Quick facts</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-card reveal">
+                <div class="icon blue" style="margin: 0 auto 1rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1 4 3 6 3s6-2 6-3v-5"/></svg>
+                </div>
+                <h3>CSE @ CUHK Shenzhen</h3>
+                <p>Computer Science &amp; Engineering</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon orange" style="margin: 0 auto 1rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </div>
+                <h3>From El Jadida, Morocco</h3>
+                <p>French high school graduate</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon green" style="margin: 0 auto 1rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3>Based in Shenzhen</h3>
+                <p>Moved here at 18, alone</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="icon purple" style="margin: 0 auto 1rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="11" width="12" height="8" rx="2"/><path d="M12 11V7a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v0"/><path d="M8 11V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v0"/><line x1="12" y1="15" x2="12" y2="15.01"/></svg>
+                </div>
+                <h3>Former Gamer</h3>
+                <p>Traded the controller for a compiler</p>
+            </div>
+        </div>
+
+        <div class="about-grid" style="margin-top: 1.5rem;">
+            <div class="about-card reveal">
+                <h3>French</h3>
+                <p>Native</p>
+                <div class="lang-bar"><div class="fill" style="width: 100%; background: var(--accent);"></div></div>
+            </div>
+            <div class="about-card reveal">
+                <h3>Arabic</h3>
+                <p>Native</p>
+                <div class="lang-bar"><div class="fill" style="width: 100%; background: var(--green);"></div></div>
+            </div>
+            <div class="about-card reveal">
+                <h3>English</h3>
+                <p>Fluent</p>
+                <div class="lang-bar"><div class="fill" style="width: 95%; background: var(--purple);"></div></div>
+            </div>
+            <div class="about-card reveal">
+                <h3>Chinese</h3>
+                <p>Learning</p>
+                <div class="lang-bar"><div class="fill" style="width: 30%; background: var(--orange);"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILAR -->
+    <section id="pilar">
+        <div class="reveal">
+            <div class="section-label">// the product</div>
+            <h2>PILAR</h2>
+            <p>Predictive Industrial Maintenance. AI that predicts machine failures before they happen. Fully offline, fully local, no cloud required.</p>
+        </div>
+
+        <div class="pilar-grid">
+            <div class="pilar-card reveal">
+                <div class="icon blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>ML-Powered Predictions</h3>
+                <p>XGBoost model trained on 236k+ data points across 23 machine profiles. Predicts failures with calibrated probability scores.</p>
+            </div>
+
+            <div class="pilar-card reveal">
+                <div class="icon green">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </div>
+                <h3>Local AI Agents</h3>
+                <p>Three specialized agents (diagnostic, maintenance, and alert) powered by Ollama running LLMs entirely on your machine. No internet needed.</p>
+            </div>
+
+            <div class="pilar-card reveal">
+                <div class="icon orange">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <h3>Desktop-First</h3>
+                <p>Ships as a native Windows installer. Built with PyInstaller and Inno Setup. Runs in your system tray, works without a browser.</p>
+            </div>
+
+            <div class="pilar-card reveal">
+                <div class="icon purple">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Privacy by Design</h3>
+                <p>Zero cloud dependency. All data stays on-premise. No telemetry, no external calls. Your factory data never leaves your network.</p>
+            </div>
+        </div>
+
+        <div class="tech-stack reveal">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Flask</span>
+            <span class="tech-tag">XGBoost</span>
+            <span class="tech-tag">AutoGen 0.4</span>
+            <span class="tech-tag">Ollama</span>
+            <span class="tech-tag">LLaMA 3.2</span>
+            <span class="tech-tag">PyInstaller</span>
+            <span class="tech-tag">Inno Setup</span>
+            <span class="tech-tag">Bootstrap</span>
+            <span class="tech-tag">pywebview</span>
+        </div>
+    </section>
+
+    <!-- Connect -->
+    <section id="connect">
+        <div class="reveal">
+            <div class="section-label">// get in touch</div>
+            <h2>Connect with me</h2>
+            <p>Whether you want to talk about predictive maintenance, startups, or just say hi.</p>
+        </div>
+
+        <div class="connect-grid">
+            <a href="https://x.com/CYPHr07" target="_blank" class="connect-card reveal">
+                <svg viewBox="0 0 24 24" fill="var(--text)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <div class="connect-info">
+                    <div class="label">Twitter / X</div>
+                    <div class="handle">@CYPHr07</div>
+                </div>
+            </a>
+
+            <a href="https://github.com/CYPHr007" target="_blank" class="connect-card reveal">
+                <svg viewBox="0 0 24 24" fill="var(--text)"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <div class="connect-info">
+                    <div class="label">GitHub</div>
+                    <div class="handle">CYPHr007</div>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/in/ali-g-1525772b5" target="_blank" class="connect-card reveal">
+                <svg viewBox="0 0 24 24" fill="var(--text)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                <div class="connect-info">
+                    <div class="label">LinkedIn</div>
+                    <div class="handle">Ali G.</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Built with persistence, not permission.</p>
+        <p class="footer-line">ali.dev &copy; 2026</p>
+    </footer>
+
+    <!-- Scroll Reveal -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

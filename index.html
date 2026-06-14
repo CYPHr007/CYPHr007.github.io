@@ -3,830 +3,996 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ali Guenbour</title>
+<title>Ali Guenbour | CYPHr007</title>
+<meta name="description" content="Ali Guenbour, also known as CYPHr007. Founder, builder, and systems-minded engineer behind NOUS, previously PILAR.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg:      #f7f5f2;
-  --white:   #ffffff;
-  --ink:     #0d0c0a;
-  --muted:   #78726a;
-  --light:   #b8b0a8;
-  --border:  #e5e0d8;
-  --surface: #ffffff;
-  --orange:  #e8531a;
-  --orange2: #ff7040;
-  --amber:   #f0a030;
-  --green:   #16a34a;
-  --display: 'Playfair Display', Georgia, serif;
-  --body:    'Inter', system-ui, sans-serif;
-  --mono:    'JetBrains Mono', monospace;
-  --ease:    cubic-bezier(.16, 1, .3, 1);
-  --ease2:   cubic-bezier(.4, 0, .2, 1);
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0d12;
+  --bg-soft:#10151d;
+  --panel:#0f141c;
+  --panel-2:#141b26;
+  --ink:#edf2ff;
+  --muted:#98a4b7;
+  --soft:#6b7688;
+  --line:rgba(255,255,255,.08);
+  --line-strong:rgba(123,161,255,.22);
+  --accent:#7ba1ff;
+  --accent-2:#5de4c7;
+  --accent-3:#ff8f70;
+  --max:1220px;
+  --pad:clamp(1.1rem,2.8vw,2rem);
+  --sans:'Space Grotesk',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --shadow:0 28px 80px rgba(0,0,0,.34);
+  --radius:22px;
 }
-
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: var(--body);
-  background: var(--bg);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(123,161,255,.12), transparent 24%),
+    radial-gradient(circle at 100% 16%, rgba(93,228,199,.08), transparent 20%),
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 12%),
+    var(--bg);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
 }
-
-/* ── ANIMATED GRADIENT BLOB ── */
-.blob {
-  position: fixed;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: .07;
-  pointer-events: none;
-  z-index: 0;
-  animation: blobmove 18s ease-in-out infinite alternate;
-  background: radial-gradient(circle, var(--orange), var(--amber));
-  top: -200px; right: -150px;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(123,161,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123,161,255,.05) 1px, transparent 1px);
+  background-size:40px 40px;
+  mask-image:linear-gradient(180deg, rgba(0,0,0,.65), transparent 88%);
 }
-.blob2 {
-  position: fixed;
-  width: 400px; height: 400px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: .05;
-  pointer-events: none;
-  z-index: 0;
-  animation: blobmove2 22s ease-in-out infinite alternate;
-  background: radial-gradient(circle, var(--amber), transparent);
-  bottom: 10%; left: -100px;
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  backdrop-filter:blur(14px);
+  background:rgba(10,13,18,.78);
+  border-bottom:1px solid var(--line);
 }
-@keyframes blobmove {
-  0%   { transform: translate(0,0) scale(1); }
-  33%  { transform: translate(-80px, 120px) scale(1.1); }
-  66%  { transform: translate(60px, -60px) scale(.9); }
-  100% { transform: translate(-40px, 80px) scale(1.05); }
+.topbar-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:.95rem var(--pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
 }
-@keyframes blobmove2 {
-  0%   { transform: translate(0,0) scale(1); }
-  50%  { transform: translate(100px, -80px) scale(1.15); }
-  100% { transform: translate(40px, 60px) scale(.95); }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:.85rem;
 }
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 clamp(1.5rem, 5vw, 4rem);
-  background: rgba(247, 245, 242, .85);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid transparent;
-  transition: border-color .3s, transform .4s var(--ease2);
+.brand-mark{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  border:1px solid var(--line-strong);
+  background:linear-gradient(180deg, rgba(123,161,255,.18), rgba(123,161,255,.05));
+  display:grid;
+  place-items:center;
+  font-family:var(--mono);
+  font-size:.68rem;
+  color:var(--accent-2);
 }
-nav.border-on { border-bottom-color: var(--border); }
-nav.hide { transform: translateY(-100%); }
-
-.nav-name {
-  font-family: var(--mono);
-  font-size: .8rem;
-  font-weight: 500;
-  letter-spacing: .05em;
-  color: var(--ink);
-  text-decoration: none;
+.brand-copy strong{
+  display:block;
+  font-size:.92rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
 }
-.nav-name span { color: var(--orange); }
-
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a {
-  font-size: .85rem;
-  font-weight: 500;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color .2s;
-  position: relative;
+.brand-copy span{
+  display:block;
+  margin-top:.1rem;
+  font-family:var(--mono);
+  font-size:.65rem;
+  color:var(--soft);
+  letter-spacing:.1em;
+  text-transform:uppercase;
 }
-.nav-links a::after {
-  content: '';
-  position: absolute; bottom: -2px; left: 0; right: 0;
-  height: 1px; background: var(--orange);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .25s var(--ease);
+.nav{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  flex-wrap:wrap;
 }
-.nav-links a:hover { color: var(--ink); }
-.nav-links a:hover::after { transform: scaleX(1); }
-
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: calc(64px + 5vw) clamp(1.5rem, 5vw, 4rem) 6vw;
-  max-width: 1100px; margin: 0 auto;
-  position: relative; z-index: 1;
+.nav a{
+  font-family:var(--mono);
+  font-size:.72rem;
+  color:var(--muted);
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
-
-.hero-tag {
-  display: inline-flex; align-items: center; gap: .5rem;
-  font-family: var(--mono); font-size: .75rem;
-  color: var(--muted);
-  margin-bottom: 2.5rem;
-  opacity: 0; animation: fadeUp .6s var(--ease) .1s forwards;
+.nav a:hover{color:var(--ink)}
+.page{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 var(--pad) 4rem;
+  position:relative;
+  z-index:1;
 }
-.hero-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--green);
-  animation: pulse 2.5s ease-in-out infinite;
+.hero{
+  padding:2rem 0 1.6rem;
 }
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(22,163,74,.4); }
-  50%  { box-shadow: 0 0 0 6px rgba(22,163,74,0); }
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(320px,.9fr) minmax(0,1.1fr);
+  gap:1.4rem;
+  align-items:stretch;
 }
-
-.hero h1 {
-  font-family: var(--display);
-  font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -.02em;
-  color: var(--ink);
-  margin-bottom: 1.8rem;
-  opacity: 0; animation: fadeUp .7s var(--ease) .25s forwards;
+.panel{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), var(--panel);
+  box-shadow:var(--shadow);
 }
-.hero h1 .orange { color: var(--orange); }
-.hero h1 .italic { font-style: italic; font-weight: 700; }
-
-.hero-sub {
-  font-size: 1.1rem;
-  font-weight: 300;
-  color: var(--muted);
-  max-width: 520px;
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
-  opacity: 0; animation: fadeUp .7s var(--ease) .4s forwards;
+.hero-image{
+  padding:1rem;
+  display:grid;
+  gap:.9rem;
 }
-
-.hero-actions {
-  display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
-  opacity: 0; animation: fadeUp .7s var(--ease) .55s forwards;
+.image-frame{
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--line-strong);
+  background:#cfd4df;
 }
-.btn {
-  display: inline-flex; align-items: center; gap: .5rem;
-  padding: .7rem 1.6rem;
-  font-size: .875rem; font-weight: 500;
-  text-decoration: none; border-radius: 6px;
-  transition: all .2s var(--ease2);
+.image-frame img{
+  width:100%;
+  aspect-ratio:4/5.15;
+  object-fit:cover;
+  object-position:center top;
 }
-.btn-filled {
-  background: var(--orange); color: #fff;
-  box-shadow: 0 1px 3px rgba(232,83,26,.2);
+.image-meta{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.7rem;
 }
-.btn-filled:hover {
-  background: var(--orange2);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(232,83,26,.25);
+.mini{
+  padding:.9rem;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel-2);
 }
-.btn-outline {
-  background: transparent; color: var(--ink);
-  border: 1.5px solid var(--border);
+.mini small{
+  display:block;
+  font-family:var(--mono);
+  font-size:.64rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--soft);
 }
-.btn-outline:hover {
-  border-color: var(--ink);
-  transform: translateY(-2px);
+.mini strong{
+  display:block;
+  margin-top:.3rem;
+  font-size:.92rem;
 }
-
-/* scroll hint */
-.scroll-hint {
-  position: absolute; bottom: 2.5rem; left: clamp(1.5rem, 5vw, 4rem);
-  display: flex; align-items: center; gap: .6rem;
-  font-family: var(--mono); font-size: .7rem; color: var(--light);
-  opacity: 0; animation: fadeIn 1s ease 1.2s forwards;
+.hero-copy{
+  padding:1.3rem;
+  display:flex;
+  flex-direction:column;
 }
-.scroll-line {
-  width: 30px; height: 1px; background: var(--light);
-  animation: scrollPulse 2s ease-in-out 1.5s infinite;
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent-2);
 }
-@keyframes scrollPulse {
-  0%, 100% { width: 30px; opacity: 1; }
-  50%  { width: 50px; opacity: .5; }
+h1{
+  margin-top:1rem;
+  font-size:clamp(2.9rem,6vw,6rem);
+  line-height:.93;
+  letter-spacing:-.06em;
+  max-width:10ch;
 }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+.hero-copy p{
+  margin-top:1.1rem;
+  max-width:60ch;
+  color:var(--muted);
+  line-height:1.9;
+  font-size:1rem;
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.hero-actions{
+  margin-top:1.4rem;
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
 }
-
-/* ── SCROLL REVEAL ── */
-.sr {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity .7s var(--ease), transform .7s var(--ease);
+.btn{
+  min-height:46px;
+  padding:0 1.05rem;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line-strong);
+  font-family:var(--mono);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease;
 }
-.sr.in { opacity: 1; transform: none; }
-.sr-delay-1 { transition-delay: .1s; }
-.sr-delay-2 { transition-delay: .2s; }
-.sr-delay-3 { transition-delay: .3s; }
-
-/* ── DIVIDER ── */
-.divider {
-  width: 100%; height: 1px; background: var(--border);
-  max-width: 1100px; margin: 0 auto;
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{
+  background:linear-gradient(180deg, rgba(123,161,255,.28), rgba(123,161,255,.12));
+  color:var(--ink);
 }
-
-/* ── SECTION WRAPPER ── */
-.section {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 6rem clamp(1.5rem, 5vw, 4rem);
-  position: relative; z-index: 1;
+.btn-secondary{
+  background:transparent;
+  color:var(--ink);
 }
-
-/* ── LABEL ── */
-.section-label {
-  font-family: var(--mono);
-  font-size: .72rem; font-weight: 500;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 1rem;
-  display: flex; align-items: center; gap: .6rem;
+.system-grid{
+  margin-top:1.5rem;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.8rem;
 }
-.section-label::before {
-  content: ''; width: 20px; height: 1.5px; background: var(--orange);
-  border-radius: 1px;
+.sys-card{
+  padding:1rem 1.05rem;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--panel-2);
 }
-
-.section h2 {
-  font-family: var(--display);
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: -.02em;
-  line-height: 1.1;
-  margin-bottom: 3.5rem;
+.sys-card small{
+  display:block;
+  font-family:var(--mono);
+  font-size:.65rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--soft);
 }
-.section h2 .italic { font-style: italic; font-weight: 700; }
-.section h2 .orange { color: var(--orange); }
-
-/* ── TIMELINE ── */
-.timeline { position: relative; padding-left: 1.5rem; }
-.timeline::before {
-  content: '';
-  position: absolute; left: 0; top: 6px;
-  width: 1.5px; bottom: 0;
-  background: linear-gradient(to bottom, var(--orange), var(--border) 85%, transparent);
-  border-radius: 1px;
+.sys-card strong{
+  display:block;
+  margin-top:.35rem;
+  font-size:.96rem;
 }
-.t-item {
-  position: relative;
-  padding-left: 2rem;
-  margin-bottom: 3.5rem;
+.sys-card span{
+  display:block;
+  margin-top:.42rem;
+  color:var(--muted);
+  line-height:1.7;
+  font-size:.9rem;
 }
-.t-item::before {
-  content: '';
-  position: absolute; left: -1.5rem; top: 6px;
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: var(--white);
-  border: 2px solid var(--orange);
-  box-shadow: 0 0 0 4px var(--bg);
+.section{
+  padding:4rem 0;
+  border-top:1px solid var(--line);
 }
-.t-year {
-  font-family: var(--mono); font-size: .7rem; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase;
-  color: var(--orange); margin-bottom: .4rem;
+.section-head{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:1.8rem;
+  align-items:start;
+  margin-bottom:1.8rem;
 }
-.t-head {
-  font-family: var(--display);
-  font-size: 1.3rem; font-weight: 700;
-  color: var(--ink); margin-bottom: .5rem; line-height: 1.2;
+.section-kicker{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent-2);
 }
-.t-body {
-  font-size: .9rem; font-weight: 400;
-  color: var(--muted); line-height: 1.8; max-width: 580px;
+h2{
+  margin-top:.7rem;
+  font-size:clamp(2rem,4.2vw,3.9rem);
+  line-height:.95;
+  letter-spacing:-.05em;
+  max-width:12ch;
 }
-.t-photo {
-  margin-top: 1.2rem;
-  border-radius: 10px; overflow: hidden;
-  max-width: 440px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+.section-head p{
+  color:var(--muted);
+  line-height:1.9;
 }
-.t-photo:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,.1);
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:1rem;
 }
-.t-photo img { width: 100%; height: auto; display: block; }
-.t-caption {
-  padding: .5rem .9rem;
-  background: var(--surface);
-  font-family: var(--mono); font-size: .7rem;
-  color: var(--light); letter-spacing: .04em;
+.card,.timeline-panel,.work-panel,.archive-brand,.archive-story,.person-card,.contact-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--panel);
 }
-
-/* ── ABOUT CHIPS ── */
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+.card{
+  padding:1.1rem;
 }
-.about-chip {
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  padding: 1.4rem 1.2rem;
-  transition: all .25s var(--ease2);
+.card small,.work-panel small,.archive-brand small,.archive-story small,.person-card small,.contact-card small{
+  display:block;
+  font-family:var(--mono);
+  font-size:.66rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--soft);
 }
-.about-chip:hover {
-  border-color: var(--orange);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(232,83,26,.08);
+.card strong,.person-card strong,.contact-card strong{
+  display:block;
+  margin-top:.35rem;
+  font-size:1rem;
 }
-.chip-icon { font-size: 1.4rem; margin-bottom: .7rem; }
-.chip-label { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--light); margin-bottom: .25rem; }
-.chip-val { font-size: .95rem; font-weight: 600; color: var(--ink); }
-.chip-sub { font-size: .8rem; color: var(--muted); margin-top: .1rem; }
-
-/* lang bars */
-.langs { display: flex; flex-direction: column; gap: .8rem; }
-.lang-row { display: flex; align-items: center; gap: 1rem; }
-.lang-name { font-size: .85rem; font-weight: 500; width: 70px; flex-shrink: 0; }
-.lang-bar { flex: 1; height: 4px; background: var(--border); border-radius: 4px; overflow: hidden; }
-.lang-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--amber)); border-radius: 4px; width: 0; transition: width 1.2s var(--ease); }
-.lang-pct { font-family: var(--mono); font-size: .7rem; color: var(--light); width: 36px; text-align: right; flex-shrink: 0; }
-
-/* ── PILAR SECTION ── */
-.pilar-section {
-  background: var(--ink);
-  color: #fff;
-  padding: 6rem clamp(1.5rem, 5vw, 4rem);
-  position: relative; z-index: 1; overflow: hidden;
+.card span,.person-card p,.contact-card span{
+  display:block;
+  margin-top:.48rem;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.75;
 }
-.pilar-inner { max-width: 1100px; margin: 0 auto; }
-.pilar-section .section-label { color: var(--orange2); }
-.pilar-section .section-label::before { background: var(--orange2); }
-.pilar-section h2 { color: #fff; margin-bottom: 3.5rem; }
-
-.pilar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: 12px; overflow: hidden;
+.story-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);
+  gap:1rem;
 }
-.p-card {
-  background: rgba(255,255,255,.02);
-  padding: 2rem 1.8rem;
-  transition: background .2s;
+.timeline-panel{
+  padding:1.2rem;
 }
-.p-card:hover { background: rgba(255,255,255,.05); }
-.p-num {
-  font-family: var(--mono); font-size: .68rem; font-weight: 500;
-  letter-spacing: .1em; color: rgba(255,255,255,.2);
-  margin-bottom: 1rem;
+.flight-card{
+  padding:1rem 1rem 1.05rem;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--panel-2);
 }
-.p-title {
-  font-family: var(--display);
-  font-size: 1.1rem; font-weight: 700;
-  margin-bottom: .5rem; color: #fff;
+.flight-card strong{
+  display:block;
+  margin-top:.35rem;
+  font-size:1rem;
 }
-.p-text { font-size: .875rem; font-weight: 300; color: rgba(255,255,255,.45); line-height: 1.75; }
-
-.tech-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.06); }
-.tech-tag { font-family: var(--mono); font-size: .7rem; padding: .3rem .75rem; border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.3); border-radius: 4px; }
-
-/* pilar background pulse */
-.pilar-section::before {
-  content: '';
-  position: absolute; top: -200px; right: -200px;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232,83,26,.12), transparent 70%);
-  pointer-events: none;
-  animation: pilarPulse 8s ease-in-out infinite alternate;
+.flight-card p{
+  margin-top:.5rem;
+  color:var(--muted);
+  line-height:1.75;
+  font-size:.9rem;
 }
-@keyframes pilarPulse {
-  from { transform: scale(1) translate(0,0); }
-  to   { transform: scale(1.2) translate(-40px, 40px); }
+.flight-map{
+  margin-top:1rem;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(123,161,255,.09), rgba(123,161,255,.03));
 }
-
-/* ── YC SECTION ── */
-.yc-card {
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  padding: 2.5rem;
-  background: var(--surface);
-  position: relative;
-  overflow: hidden;
-  max-width: 820px;
-  transition: border-color .3s, box-shadow .3s;
+.flight-map svg{
+  width:100%;
+  display:block;
 }
-.yc-card:hover {
-  border-color: var(--orange);
-  box-shadow: 0 8px 32px rgba(232,83,26,.08);
+.timeline{
+  margin-top:1rem;
 }
-.yc-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: linear-gradient(90deg, var(--orange), var(--amber), transparent);
+.timeline-item{
+  display:grid;
+  grid-template-columns:120px minmax(0,1fr);
+  gap:1.25rem;
+  padding:1.1rem 0;
+  border-top:1px solid var(--line);
 }
-.yc-pill {
-  display: inline-flex; align-items: center; gap: .4rem;
-  font-family: var(--mono); font-size: .7rem; font-weight: 500;
-  letter-spacing: .08em; text-transform: uppercase;
-  color: var(--orange);
-  background: rgba(232,83,26,.07);
-  border: 1px solid rgba(232,83,26,.15);
-  padding: .3rem .8rem; border-radius: 100px;
-  margin-bottom: 1.2rem;
+.timeline-item:first-child{border-top:none}
+.timeline-item small{
+  padding-top:.25rem;
 }
-.yc-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
-.yc-title {
-  font-family: var(--display);
-  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-  font-weight: 700; line-height: 1.2;
-  margin-bottom: 1rem; color: var(--ink);
+.timeline-item h3{
+  font-size:1.38rem;
+  line-height:1.15;
 }
-.yc-body { font-size: .9rem; color: var(--muted); line-height: 1.85; margin-bottom: .9rem; max-width: 58ch; }
-.yc-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.4rem; }
-.yc-tag {
-  font-family: var(--mono); font-size: .68rem;
-  padding: .28rem .7rem; border-radius: 4px;
-  border: 1px solid var(--border); color: var(--muted);
+.timeline-item p{
+  margin-top:.45rem;
+  color:var(--muted);
+  line-height:1.8;
 }
-.yc-tag.hi { color: var(--orange); border-color: rgba(232,83,26,.25); background: rgba(232,83,26,.04); }
-
-/* ── CONNECT ── */
-.connect-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
+.media-stack{
+  display:grid;
+  gap:1rem;
 }
-.c-card {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1.4rem 1.2rem;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  text-decoration: none; color: var(--ink);
-  transition: all .25s var(--ease2);
+.media-frame{
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:var(--panel);
 }
-.c-card:hover {
-  border-color: var(--orange);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,.07);
+.media-frame img{
+  width:100%;
+  aspect-ratio:1.16/1;
+  object-fit:cover;
 }
-.c-icon { width: 20px; height: 20px; flex-shrink: 0; fill: var(--muted); transition: fill .2s; }
-.c-card:hover .c-icon { fill: var(--orange); }
-.c-label { font-family: var(--mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: var(--light); margin-bottom: .2rem; }
-.c-handle { font-size: .9rem; font-weight: 600; }
-
-/* ── FOOTER ── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 2.5rem clamp(1.5rem, 5vw, 4rem);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem;
-  max-width: 1100px; margin: 0 auto;
-  position: relative; z-index: 1;
+.media-frame figcaption{
+  padding:.85rem 1rem;
+  font-family:var(--mono);
+  font-size:.66rem;
+  color:var(--soft);
+  letter-spacing:.1em;
+  text-transform:uppercase;
 }
-.footer-left { font-size: .85rem; color: var(--muted); }
-.footer-left strong { color: var(--ink); font-weight: 600; }
-.footer-right { font-family: var(--mono); font-size: .7rem; color: var(--light); letter-spacing: .06em; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 640px) {
-  .nav-links { display: none; }
-  .connect-grid { grid-template-columns: 1fr; }
-  .about-grid { grid-template-columns: 1fr 1fr; }
+.work-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:1rem;
+}
+.work-panel{
+  padding:1.2rem;
+}
+.work-panel h3,.archive-story h3{
+  margin-top:.45rem;
+  font-size:1.56rem;
+  line-height:1.12;
+}
+.work-panel p,.archive-story p,.archive-brand p{
+  margin-top:.6rem;
+  color:var(--muted);
+  line-height:1.82;
+}
+.tag-row{
+  margin-top:1rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+}
+.tag{
+  padding:.45rem .68rem;
+  border:1px solid var(--line-strong);
+  border-radius:999px;
+  font-family:var(--mono);
+  font-size:.68rem;
+  color:var(--muted);
+  background:var(--panel-2);
+}
+.archive-grid{
+  display:grid;
+  grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);
+  gap:1rem;
+}
+.archive-brand,.archive-story{
+  padding:1.2rem;
+}
+.archive-logo-shell{
+  min-height:190px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#f7f7f7;
+  display:grid;
+  place-items:center;
+  padding:1rem;
+}
+.archive-logo-shell img{
+  max-width:min(100%,380px);
+  max-height:122px;
+  object-fit:contain;
+}
+.archive-logo-fallback{
+  text-align:center;
+  color:#111;
+}
+.archive-logo-fallback strong{
+  display:block;
+  font-size:1.5rem;
+}
+.archive-logo-fallback span{
+  display:block;
+  margin-top:.4rem;
+  font-family:var(--mono);
+  font-size:.68rem;
+  color:#666;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.archive-people{
+  margin-top:1rem;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:.8rem;
+}
+.archive-person{
+  padding:1rem;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--panel-2);
+}
+.archive-person strong{
+  display:block;
+  margin-top:.32rem;
+  font-size:.98rem;
+}
+.archive-person span{
+  display:block;
+  margin-top:.45rem;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1.75;
+}
+.people-grid,.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1rem;
+}
+.person-card,.contact-card{
+  padding:1.1rem;
+}
+.contact-card{
+  transition:transform .18s ease,border-color .18s ease;
+}
+.contact-card:hover{
+  transform:translateY(-2px);
+  border-color:var(--line-strong);
+}
+footer{
+  padding:1.6rem 0 0;
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  color:var(--soft);
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.in{
+  opacity:1;
+  transform:none;
+}
+@media (max-width:1080px){
+  .hero-grid,.section-head,.story-layout,.work-grid,.archive-grid,.card-grid,.people-grid,.contact-grid{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .nav a:not(.btn-link){display:none}
+  .system-grid,.image-meta,.archive-people{grid-template-columns:1fr}
+  .timeline-item{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <div class="brand-mark">128482</div>
+        <div class="brand-copy">
+          <strong>Ali Guenbour</strong>
+          <span>CYPHr007 / Systems builder</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#story">Trajectory</a>
+        <a href="#work">NOUS</a>
+        <a href="#archive">Human Archive</a>
+        <a href="#people">People</a>
+        <a href="#connect">Links</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="blob"></div>
-<div class="blob2"></div>
+  <main class="page">
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="panel hero-image">
+          <div class="image-frame">
+            <img id="portraitImage" src="crimefile-mugshot.png" alt="Ali Guenbour portrait">
+          </div>
+          <div class="image-meta">
+            <div class="mini">
+              <small>Alias</small>
+              <strong>CYPHr007</strong>
+            </div>
+            <div class="mini">
+              <small>Reference</small>
+              <strong>128482</strong>
+            </div>
+            <div class="mini">
+              <small>Status</small>
+              <strong>Active</strong>
+            </div>
+          </div>
+        </div>
 
-<!-- Nav -->
-<nav id="nav">
-  <a href="#" class="nav-name">ali<span>.</span>dev</a>
-  <ul class="nav-links">
-    <li><a href="#story">Story</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#pilar">PILAR</a></li>
-    <li><a href="#yc">YC W26</a></li>
-    <li><a href="#connect">Connect</a></li>
-  </ul>
-</nav>
-
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-tag">
-    <span class="hero-dot"></span>
-    Building in Shenzhen
-  </div>
-  <h1>
-    Hey, I'm Ali.<br>
-    I build things that<br>
-    <span class="orange italic">didn't exist yet.</span>
-  </h1>
-  <p class="hero-sub">
-    18-year-old from Morocco, now a CSE student at CUHK Shenzhen.
-    Former gamer turned founder. Went from zero code knowledge to building
-    an industrial AI product — in under a year.
-  </p>
-  <div class="hero-actions">
-    <a href="https://github.com/CYPHr007/PILAR" target="_blank" class="btn btn-filled">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      View PILAR
-    </a>
-    <a href="#story" class="btn btn-outline">Read my story ↓</a>
-  </div>
-  <div class="scroll-hint">
-    <span class="scroll-line"></span>
-    scroll
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- Story -->
-<section class="section" id="story">
-  <div class="sr">
-    <div class="section-label">My journey</div>
-    <h2>From El Jadida<br>to <span class="orange">Shenzhen.</span></h2>
-  </div>
-
-  <div class="timeline">
-    <div class="t-item sr">
-      <div class="t-year">Morocco</div>
-      <h3 class="t-head">The gamer years</h3>
-      <p class="t-body">Growing up in El Jadida, I had zero connection to tech. Gaming was my whole universe. I graduated from a French high school without knowing what a line of code looked like. But gaming taught me something: the patience to grind through hard problems, and the obsession to get better.</p>
-      <div class="t-photo">
-        <img src="toubkal3.jpg" alt="Summit of Mount Toubkal" loading="lazy">
-        <div class="t-caption">Summit of Mount Toubkal, 4,167m — age 16.</div>
+        <div class="panel hero-copy">
+          <div class="eyebrow">Personal system map</div>
+          <h1>I like hard systems, clear signals, and work that has weight.</h1>
+          <p>
+            I am Ali Guenbour, also known as CYPHr007. I grew up in El Jadida, moved to Shenzhen at 18,
+            studied Computer Science and Engineering at CUHK Shenzhen, and built my first serious company around a simple idea:
+            machines reveal what is coming before failure, if you learn how to read them.
+          </p>
+          <p>
+            That company began as PILAR and became NOUS. This page is a cleaner map of the person, the work,
+            and the people who shaped the direction.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#work">Open work log</a>
+            <a class="btn btn-secondary" href="https://github.com/CYPHr007/PILAR" target="_blank" rel="noopener">View repo</a>
+          </div>
+          <div class="system-grid">
+            <div class="sys-card">
+              <small>Location</small>
+              <strong>Shenzhen, China</strong>
+              <span>Where the pressure, speed, and opportunity all felt aligned.</span>
+            </div>
+            <div class="sys-card">
+              <small>Main build</small>
+              <strong>NOUS / formerly PILAR</strong>
+              <span>Predictive maintenance, local AI, and industrial systems thinking.</span>
+            </div>
+            <div class="sys-card">
+              <small>Background</small>
+              <strong>Morocco to engineering</strong>
+              <span>A fast transition from no-code beginnings to shipping real products.</span>
+            </div>
+            <div class="sys-card">
+              <small>Current bias</small>
+              <strong>Hardware, ML, signal quality</strong>
+              <span>Work that goes beyond interface and touches reality.</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="t-item sr sr-delay-1">
-      <div class="t-year">The Seed</div>
-      <h3 class="t-head">Internship at Kapachim Maroc</h3>
-      <p class="t-body">Before I knew anything about code, I interned at Kapachim Maroc, a chemical manufacturing plant. I saw the factory floor up close: the machines, the breakdowns, the cost of unplanned downtime. I didn't know it yet, but this experience planted the seed that would become PILAR.</p>
-      <div class="t-photo">
-        <img src="IMG-20220331-WA0012.jpg" alt="Internship at Kapachim Maroc" loading="lazy">
-        <div class="t-caption">Kapachim Maroc — where the idea for PILAR was born.</div>
+    <section class="section reveal" id="profile">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Profile</div>
+          <h2>Four vectors that describe me best.</h2>
+        </div>
+        <p>
+          I wanted this version to feel more like a system dashboard than a soft portfolio.
+          The point is not decoration. The point is to show the structure of how I think and what I tend to build.
+        </p>
       </div>
-    </div>
 
-    <div class="t-item sr">
-      <div class="t-year">The Leap</div>
-      <h3 class="t-head">Leaving home at 18</h3>
-      <p class="t-body">At 18, I left my parents and everything I knew in Morocco to move to Shenzhen, alone. No safety net. No connections. Barely any Mandarin. I enrolled in Computer Science and Engineering at CUHK Shenzhen. The distance from family was the hardest part — but I knew that if I wanted to build something real, I had to put myself where things are built.</p>
-      <div class="t-photo">
-        <img src="firstdayinsz.jpg" alt="First day in Shenzhen" loading="lazy">
-        <div class="t-caption">First day in Shenzhen — a new chapter.</div>
+      <div class="card-grid">
+        <div class="card">
+          <small>Origin</small>
+          <strong>El Jadida, Morocco</strong>
+          <span>French high school background, then a sharp pivot into engineering, software, and startups.</span>
+        </div>
+        <div class="card">
+          <small>Education</small>
+          <strong>CUHK Shenzhen</strong>
+          <span>Computer Science and Engineering while learning by building in parallel.</span>
+        </div>
+        <div class="card">
+          <small>Pattern</small>
+          <strong>Fast learning under pressure</strong>
+          <span>From zero code background to ML, desktop tools, and product systems in under a year.</span>
+        </div>
+        <div class="card">
+          <small>Bias</small>
+          <strong>Real systems over abstraction</strong>
+          <span>Factories, hardware, signal analysis, robotics, and problems that exist outside a browser tab.</span>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="t-item sr sr-delay-1">
-      <div class="t-year">The Brotherhood</div>
-      <h3 class="t-head">The people who changed everything</h3>
-      <p class="t-body">I moved into a small dorm room with 3 other students. They became my brothers. And then there's Rayan — the friend who told me to apply to CUHK Shenzhen. He introduced me to tech, connected me with people in the field, and opened my eyes to the startup ecosystem. I wouldn't be here without him.</p>
-      <div class="t-photo">
-        <img src="rayanmyfriend.jpg" alt="Ali with Rayan" loading="lazy">
-        <div class="t-caption">With Rayan — the one who started it all.</div>
+    <section class="section reveal" id="story">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Trajectory</div>
+          <h2>The move that rewired the system.</h2>
+        </div>
+        <p>
+          The story makes more sense as a sequence of inputs and outputs than as a motivational speech.
+          A few environments changed the direction of everything.
+        </p>
       </div>
-    </div>
 
-    <div class="t-item sr">
-      <div class="t-year">The Transformation</div>
-      <h3 class="t-head">Zero to everything in under a year</h3>
-      <p class="t-body">In less than a year, I went from someone who had never coded to someone building full-stack apps, training ML models, and writing AI agents. Python, web development, machine learning, desktop packaging, system design. When you have nothing to fall back on, you learn fast.</p>
-    </div>
+      <div class="story-layout">
+        <div class="timeline-panel">
+          <div class="flight-card">
+            <small>Route</small>
+            <strong>El Jadida to Shenzhen</strong>
+            <p>One of the most important transitions in my life. A long move, a hard reset, and the beginning of a much higher-speed environment.</p>
+            <div class="flight-map" aria-hidden="true">
+              <svg viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <filter id="softPlane" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="2.2" result="blur"/>
+                    <feMerge>
+                      <feMergeNode in="blur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <path d="M88 156C182 128 248 86 344 82C454 78 536 136 672 88" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
+                <path d="M88 156C182 128 248 86 344 82C454 78 536 136 672 88" stroke="#7ba1ff" stroke-width="2.5" stroke-dasharray="8 10" stroke-linecap="round"/>
+                <circle cx="88" cy="156" r="6.5" fill="#edf2ff"/>
+                <circle cx="672" cy="88" r="6.5" fill="#5de4c7"/>
+                <text x="70" y="184" fill="#98a4b7" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="1.5">EL JADIDA</text>
+                <text x="615" y="62" fill="#98a4b7" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="1.5">SHENZHEN</text>
+                <g filter="url(#softPlane)">
+                  <path d="M0 -10L20 0L0 10L4 2L-16 2L-16 -2L4 -2L0 -10Z" fill="#edf2ff">
+                    <animateMotion dur="5.8s" repeatCount="indefinite" rotate="auto">
+                      <mpath href="#flightMotionPath"/>
+                    </animateMotion>
+                  </path>
+                </g>
+                <path id="flightMotionPath" d="M88 156C182 128 248 86 344 82C454 78 536 136 672 88" fill="none" stroke="transparent"/>
+              </svg>
+            </div>
+          </div>
 
-    <div class="t-item sr sr-delay-1">
-      <div class="t-year">Now</div>
-      <h3 class="t-head">Shipping, studying, scaling.</h3>
-      <p class="t-body">PILAR is live — a desktop app with local AI agents, offline-first, zero cloud dependency. I'm still a CSE student at CUHK Shenzhen, still learning Chinese, still building. The journey from a gamer in Morocco to a founder in China happened in under a year. It's only the beginning.</p>
-    </div>
-  </div>
-</section>
+          <div class="timeline">
+            <div class="timeline-item">
+              <small>Before code</small>
+              <div>
+                <h3>The early years</h3>
+                <p>Gaming was a large part of my world. Looking back, it taught patience, iteration, and how to stay with difficult things long enough to get better.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <small>First signal</small>
+              <div>
+                <h3>Kapachim Maroc</h3>
+                <p>An internship in a chemical manufacturing plant gave me my first close view of machines, breakdowns, and the cost of downtime. That is where the seed of PILAR began.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <small>Turning point</small>
+              <div>
+                <h3>Moving to Shenzhen at 18</h3>
+                <p>I left home and moved alone to China for CUHK Shenzhen. The distance was real, but it put me inside the environment where I could actually start building seriously.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <small>Acceleration</small>
+              <div>
+                <h3>Learning fast enough to ship</h3>
+                <p>In less than a year I moved from no coding background to building products, training models, packaging desktop software, and working with AI systems under real constraints.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<div class="divider"></div>
-
-<!-- About -->
-<section class="section" id="about">
-  <div class="sr">
-    <div class="section-label">The person</div>
-    <h2>Quick facts.</h2>
-  </div>
-
-  <div class="about-grid sr">
-    <div class="about-chip">
-      <div class="chip-icon">🎓</div>
-      <div class="chip-label">University</div>
-      <div class="chip-val">CUHK Shenzhen</div>
-      <div class="chip-sub">Computer Science & Engineering</div>
-    </div>
-    <div class="about-chip">
-      <div class="chip-icon">🇲🇦</div>
-      <div class="chip-label">Origin</div>
-      <div class="chip-val">El Jadida, Morocco</div>
-      <div class="chip-sub">French high school grad</div>
-    </div>
-    <div class="about-chip">
-      <div class="chip-icon">📍</div>
-      <div class="chip-label">Based in</div>
-      <div class="chip-val">Shenzhen, China</div>
-      <div class="chip-sub">Moved here at 18, alone</div>
-    </div>
-    <div class="about-chip">
-      <div class="chip-icon">🎮</div>
-      <div class="chip-label">Background</div>
-      <div class="chip-val">Former Gamer</div>
-      <div class="chip-sub">Traded controller for compiler</div>
-    </div>
-  </div>
-
-  <div class="langs sr">
-    <div class="lang-row">
-      <span class="lang-name">French</span>
-      <div class="lang-bar"><div class="lang-fill" data-w="100"></div></div>
-      <span class="lang-pct">Native</span>
-    </div>
-    <div class="lang-row">
-      <span class="lang-name">Arabic</span>
-      <div class="lang-bar"><div class="lang-fill" data-w="100"></div></div>
-      <span class="lang-pct">Native</span>
-    </div>
-    <div class="lang-row">
-      <span class="lang-name">English</span>
-      <div class="lang-bar"><div class="lang-fill" data-w="95"></div></div>
-      <span class="lang-pct">Fluent</span>
-    </div>
-    <div class="lang-row">
-      <span class="lang-name">Chinese</span>
-      <div class="lang-bar"><div class="lang-fill" data-w="28"></div></div>
-      <span class="lang-pct">Learning</span>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PILAR -->
-<div class="pilar-section" id="pilar">
-  <div class="pilar-inner">
-    <div class="sr">
-      <div class="section-label">The product</div>
-      <h2>PILAR — <span class="italic">predictive industrial<br>maintenance.</span></h2>
-    </div>
-
-    <div class="pilar-grid sr">
-      <div class="p-card">
-        <div class="p-num">01</div>
-        <h3 class="p-title">ML-Powered Predictions</h3>
-        <p class="p-text">GradientBoosting trained on 220k+ real sensor readings. Recall 100%, F1 100%. Detection window up to 5 hours before failure.</p>
+        <div class="media-stack">
+          <figure class="media-frame">
+            <img src="IMG-20220331-WA0012.jpg" alt="Kapachim Maroc internship">
+            <figcaption>Kapachim Maroc / origin of the first industrial thesis</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <img src="firstdayinsz.jpg" alt="First day in Shenzhen">
+            <figcaption>Shenzhen / first day in the city that changed the tempo</figcaption>
+          </figure>
+          <figure class="media-frame">
+            <img src="toubkal3.jpg" alt="Mount Toubkal">
+            <figcaption>Toubkal / a useful reminder that endurance showed up early</figcaption>
+          </figure>
+        </div>
       </div>
-      <div class="p-card">
-        <div class="p-num">02</div>
-        <h3 class="p-title">Local AI Agents</h3>
-        <p class="p-text">Three specialized agents: diagnostic, maintenance, alert. Powered by Qwen3 via Ollama, running entirely on your machine.</p>
+    </section>
+
+    <section class="section reveal" id="work">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">NOUS</div>
+          <h2>From predictive maintenance to maintenance intelligence.</h2>
+        </div>
+        <p>
+          My first business started as PILAR and became NOUS. The question that started it stayed the same,
+          if machines show signs before failure, why are those signs still missed, but the answer has grown.
+          NOUS is no longer just a model that predicts. It is becoming the memory layer for a plant: every
+          recommendation, every decision, and every outcome, recorded and built on any industrial machine.
+        </p>
       </div>
-      <div class="p-card">
-        <div class="p-num">03</div>
-        <h3 class="p-title">Desktop-First</h3>
-        <p class="p-text">Native Windows installer. Built with PyInstaller and Inno Setup. Lives in your system tray, works without a browser.</p>
+
+      <div class="work-grid">
+        <div class="work-panel">
+          <small>Main build</small>
+          <h3>Maintenance intelligence, not just predictive maintenance.</h3>
+          <p>
+            NOUS started from what I saw on the industrial side: signal before failure, missed every time.
+            That part still holds. What changed is the scope. NOUS is machine-agnostic, it retrains on any
+            equipment's real data, and it now carries the decisions a team makes, not just the warnings it gives.
+            From reactive to structured is the short version of where this is going.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Desktop App</span>
+            <span class="tag">Offline AI</span>
+            <span class="tag">Industrial Systems</span>
+          </div>
+        </div>
+
+        <div class="work-panel">
+          <small>Design logic</small>
+          <h3>Local, readable, and close to the operator.</h3>
+          <p>
+            The system matters to me because it is not abstract. It connects software, machine signals,
+            failure patterns, and the people who actually need to decide whether something is becoming dangerous.
+            Confidence that is earned, not assumed, even when that means the system saying it does not know yet.
+          </p>
+          <div class="tag-row">
+            <span class="tag">PILAR</span>
+            <span class="tag">NOUS</span>
+            <span class="tag">On-premise bias</span>
+            <span class="tag">Signal quality</span>
+          </div>
+        </div>
       </div>
-      <div class="p-card">
-        <div class="p-num">04</div>
-        <h3 class="p-title">Privacy by Design</h3>
-        <p class="p-text">Zero cloud dependency. All data stays on-premise. No telemetry, no external calls. Your factory data never leaves the network.</p>
+
+      <a class="contact-card" href="https://trypilar.com" target="_blank" rel="noopener" style="margin-top:1rem;display:flex;align-items:center;gap:1.1rem">
+        <div class="archive-logo-shell" style="min-height:auto;width:64px;height:64px;padding:.7rem;border-radius:14px;flex-shrink:0">
+          <img src="nous-logo.png" alt="NOUS logo" style="max-height:100%;max-width:100%">
+        </div>
+        <div>
+          <small>Live product</small>
+          <strong>trypilar.com</strong>
+          <span>NOUS today: maintenance intelligence for any industrial machine.</span>
+        </div>
+      </a>
+    </section>
+
+    <section class="section reveal" id="archive">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Human Archive</div>
+          <h2>A short node, still on the map.</h2>
+        </div>
+        <p>
+          Human Archive gets its own section even though I was only there about a month. In that time it pushed me
+          further into hardware and motion capture, and into the idea that model quality starts much earlier,
+          at the level of how data is physically collected.
+        </p>
       </div>
-    </div>
 
-    <div class="tech-tags sr">
-      <span class="tech-tag">Python</span>
-      <span class="tech-tag">Flask</span>
-      <span class="tech-tag">GradientBoosting</span>
-      <span class="tech-tag">SHAP</span>
-      <span class="tech-tag">Qwen3 4B</span>
-      <span class="tech-tag">Ollama</span>
-      <span class="tech-tag">PyInstaller</span>
-      <span class="tech-tag">SQLAlchemy</span>
-      <span class="tech-tag">pywebview</span>
-    </div>
-  </div>
-</div>
+      <div class="archive-grid">
+        <div class="archive-brand">
+          <small>Organization</small>
+          <div class="archive-logo-shell">
+            <img id="archiveLogo" src="human-archive-logo.png" alt="Human Archive logo">
+            <div id="archiveLogoFallback" class="archive-logo-fallback" hidden>
+              <strong>Human Archive</strong>
+              <span>Logo area wired for your provided image</span>
+            </div>
+          </div>
+          <p>
+            This is where hardware, capture systems, and data quality all became much more concrete for me.
+          </p>
+        </div>
 
-<div class="divider"></div>
-
-<!-- YC W26 -->
-<section class="section" id="yc">
-  <div class="sr">
-    <div class="section-label">Current work</div>
-    <h2>Y Combinator W26 —<br><span class="orange italic">teaching robots<br>to be human.</span></h2>
-  </div>
-
-  <div class="yc-card sr">
-    <div class="yc-pill"><span class="yc-pill-dot"></span>YC W26 · Shenzhen</div>
-    <h3 class="yc-title">Building the hardware that teaches<br>robots how to move like humans.</h3>
-    <p class="yc-body">At Human Archive, we're building a full-body multimodal motion capture system from scratch — the hardware, the capture pipeline, the data. The goal: produce the highest-quality human movement datasets ever collected, at scale, to train the next generation of robots.</p>
-    <p class="yc-body">I'm on the hardware side. That means designing and assembling the physical capture rigs in Shenzhen — the city where this kind of thing is actually possible. Sensors, suits, synchronization, calibration. Every detail matters because the robots learning from this data will depend on it.</p>
-    <p class="yc-body">Raj Patel, CEO of Human Archive, and Shlock, head of hardware, opened their doors to me. They trusted me with real responsibility at 18 — before a track record, before credentials. That kind of bet changes you. I don't take it lightly.</p>
-    <p class="yc-body">Most AI labs think about data as a software problem. We think about it as a hardware problem. The bottleneck isn't compute — it's the quality of what you feed the model. We're fixing that.</p>
-    <div class="yc-tags">
-      <span class="yc-tag hi">YC W26</span>
-      <span class="yc-tag hi">Human Archive</span>
-      <span class="yc-tag hi">Hardware</span>
-      <span class="yc-tag">Full-Body MoCap</span>
-      <span class="yc-tag">Robot Training Data</span>
-      <span class="yc-tag">Multimodal AI</span>
-      <span class="yc-tag">Shenzhen</span>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- Connect -->
-<section class="section" id="connect">
-  <div class="sr">
-    <div class="section-label">Get in touch</div>
-    <h2>Connect.</h2>
-  </div>
-
-  <div class="connect-grid sr">
-    <a href="https://x.com/aliguenbour" target="_blank" class="c-card">
-      <svg class="c-icon" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      <div>
-        <div class="c-label">Twitter / X</div>
-        <div class="c-handle">@aliguenbour</div>
+        <div class="archive-story">
+          <small>Past chapter, about a month</small>
+          <h3>Working closer to hardware changed the perspective.</h3>
+          <p>
+            Around Human Archive, the work became more physical: rigs, motion, synchronization, and what it takes
+            to collect data that is actually good enough to matter downstream. I moved on after about a month,
+            back to NOUS, but the shift in how I think about data collection stayed with me.
+          </p>
+          <p>
+            Raj and Shloke belong in a special place here because they trusted me early and gave me access to a more serious level of work.
+            That trust changed the standard I hold myself to.
+          </p>
+          <div class="archive-people">
+            <div class="archive-person">
+              <small>Person</small>
+              <strong>Raj</strong>
+              <span>A strong part of why this chapter matters to me. Serious trust, serious expectations, serious work.</span>
+            </div>
+            <div class="archive-person">
+              <small>Person</small>
+              <strong>Shloke</strong>
+              <span>Connected to the hardware side of the story and to the environment that made this phase feel concrete and demanding.</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </a>
-    <a href="https://github.com/CYPHr007" target="_blank" class="c-card">
-      <svg class="c-icon" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-      <div>
-        <div class="c-label">GitHub</div>
-        <div class="c-handle">CYPHr007</div>
-      </div>
-    </a>
-    <a href="https://www.linkedin.com/in/ali-guenbour-1525772b5" target="_blank" class="c-card">
-      <svg class="c-icon" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      <div>
-        <div class="c-label">LinkedIn</div>
-        <div class="c-handle">Ali Guenbour</div>
-      </div>
-    </a>
-  </div>
-</section>
+    </section>
 
-<!-- Footer -->
-<footer>
-  <span class="footer-left"><strong>Ali Guenbour</strong></span>
-  <span class="footer-right">BUILD WITH MEANING · © 2026</span>
-</footer>
+    <section class="section reveal" id="people">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">People</div>
+          <h2>The people around the work.</h2>
+        </div>
+        <p>
+          A good personal site should say clearly who mattered. Some people changed the direction, others changed the level of trust and responsibility.
+        </p>
+      </div>
+
+      <div class="people-grid">
+        <div class="person-card">
+          <small>Friend</small>
+          <strong>Rayan</strong>
+          <p>He pushed me toward CUHK Shenzhen, opened the door to tech, and helped me see a much larger world than the one I started in.</p>
+        </div>
+        <div class="person-card">
+          <small>Circle</small>
+          <strong>The dorm brothers</strong>
+          <p>The people who made a foreign place feel livable while everything else was changing quickly and the system was still unstable.</p>
+        </div>
+        <div class="person-card">
+          <small>Trust</small>
+          <strong>Raj and Shloke</strong>
+          <p>They trusted me with real work early, especially around hardware, and that trust sharpened my own sense of seriousness.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="connect">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Links</div>
+          <h2>Where to find me.</h2>
+        </div>
+        <p>
+          If you want to talk about NOUS, manufacturing, robotics, hardware, Shenzhen, or building quickly from scratch, these are the cleanest paths.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <a class="contact-card" href="https://github.com/CYPHr007" target="_blank" rel="noopener">
+          <small>GitHub</small>
+          <strong>CYPHr007</strong>
+          <span>Code, products, and public artifacts.</span>
+        </a>
+        <a class="contact-card" href="https://x.com/aliguenbour" target="_blank" rel="noopener">
+          <small>X</small>
+          <strong>@aliguenbour</strong>
+          <span>Current work, thoughts, and updates.</span>
+        </a>
+        <a class="contact-card" href="https://www.linkedin.com/in/ali-guenbour-1525772b5" target="_blank" rel="noopener">
+          <small>LinkedIn</small>
+          <strong>Ali Guenbour</strong>
+          <span>Professional trace and background.</span>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>Ali Guenbour / CYPHr007</div>
+      <div>NOUS was first called PILAR</div>
+    </footer>
+  </main>
 
 <script>
-  // Nav: show border on scroll, hide on scroll down / show on scroll up
-  const nav = document.getElementById('nav');
-  let lastY = 0;
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    nav.classList.toggle('border-on', y > 20);
-    nav.classList.toggle('hide', y > lastY && y > 120);
-    lastY = y;
-  }, { passive: true });
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("in");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
 
-  // Scroll reveal
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+document.querySelectorAll(".reveal").forEach((node) => revealObserver.observe(node));
 
-  // Animate lang bars when they come into view
-  const langObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.lang-fill').forEach(bar => {
-          bar.style.width = bar.dataset.w + '%';
-        });
-        langObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  const langsEl = document.querySelector('.langs');
-  if (langsEl) langObs.observe(langsEl);
+const portraitImage = document.getElementById("portraitImage");
+const portraitSources = [
+  "crimefile-mugshot.png",
+  "crimefile-mugshot.jpg",
+  "crimefile-mugshot.jpeg",
+  "firstdayinsz.jpg",
+  "IMG-20220331-WA0012.jpg"
+];
+let portraitIndex = 0;
+portraitImage.addEventListener("error", () => {
+  portraitIndex += 1;
+  if (portraitIndex < portraitSources.length) {
+    portraitImage.src = portraitSources[portraitIndex];
+  }
+});
+portraitImage.src = portraitSources[portraitIndex];
+
+const archiveLogo = document.getElementById("archiveLogo");
+const archiveLogoFallback = document.getElementById("archiveLogoFallback");
+if (archiveLogo) {
+  archiveLogo.addEventListener("error", () => {
+    archiveLogo.hidden = true;
+    if (archiveLogoFallback) archiveLogoFallback.hidden = false;
+  });
+}
 </script>
 </body>
 </html>

@@ -4,995 +4,544 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ali Guenbour | CYPHr007</title>
-<meta name="description" content="Ali Guenbour, also known as CYPHr007. Founder, builder, and systems-minded engineer behind NOUS, previously PILAR.">
+<meta name="description" content="Ali Guenbour, also known as CYPHr007. Builder of NOUS, previously PILAR.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0d12;
-  --bg-soft:#10151d;
-  --panel:#0f141c;
-  --panel-2:#141b26;
-  --ink:#edf2ff;
-  --muted:#98a4b7;
-  --soft:#6b7688;
-  --line:rgba(255,255,255,.08);
-  --line-strong:rgba(123,161,255,.22);
-  --accent:#7ba1ff;
-  --accent-2:#5de4c7;
-  --accent-3:#ff8f70;
-  --max:1220px;
-  --pad:clamp(1.1rem,2.8vw,2rem);
-  --sans:'Space Grotesk',sans-serif;
+  --paper:#f7f4ee;
+  --ink:#2b2825;
+  --ink-soft:#57514a;
+  --muted:#978f83;
+  --line:#e3dcd0;
+  --accent:#9a5b3f;
+  --serif:'Lora',Georgia,serif;
   --mono:'IBM Plex Mono',monospace;
-  --shadow:0 28px 80px rgba(0,0,0,.34);
-  --radius:22px;
+  --col:660px;
+  --pad:clamp(1.25rem,5vw,2.5rem);
 }
 html{scroll-behavior:smooth}
 body{
-  font-family:var(--sans);
+  background:var(--paper);
   color:var(--ink);
-  background:
-    radial-gradient(circle at 18% 0%, rgba(123,161,255,.12), transparent 24%),
-    radial-gradient(circle at 100% 16%, rgba(93,228,199,.08), transparent 20%),
-    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0) 12%),
-    var(--bg);
-  min-height:100vh;
+  font-family:var(--serif);
+  font-size:17px;
+  line-height:1.75;
   -webkit-font-smoothing:antialiased;
 }
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    linear-gradient(rgba(123,161,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(123,161,255,.05) 1px, transparent 1px);
-  background-size:40px 40px;
-  mask-image:linear-gradient(180deg, rgba(0,0,0,.65), transparent 88%);
-}
-a{color:inherit;text-decoration:none}
+a{color:var(--ink);text-decoration-color:var(--line)}
+a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 img{display:block;max-width:100%}
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:30;
-  backdrop-filter:blur(14px);
-  background:rgba(10,13,18,.78);
+
+.bar{
   border-bottom:1px solid var(--line);
 }
-.topbar-inner{
-  max-width:var(--max);
+.bar-inner{
+  max-width:var(--col);
   margin:0 auto;
-  padding:.95rem var(--pad);
+  padding:1.1rem var(--pad);
   display:flex;
-  align-items:center;
+  align-items:baseline;
   justify-content:space-between;
-  gap:1rem;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:.85rem;
-}
-.brand-mark{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  border:1px solid var(--line-strong);
-  background:linear-gradient(180deg, rgba(123,161,255,.18), rgba(123,161,255,.05));
-  display:grid;
-  place-items:center;
-  font-family:var(--mono);
-  font-size:.68rem;
-  color:var(--accent-2);
-}
-.brand-copy strong{
-  display:block;
-  font-size:.92rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.brand-copy span{
-  display:block;
-  margin-top:.1rem;
-  font-family:var(--mono);
-  font-size:.65rem;
-  color:var(--soft);
-  letter-spacing:.1em;
-  text-transform:uppercase;
-}
-.nav{
-  display:flex;
-  align-items:center;
   gap:1rem;
   flex-wrap:wrap;
 }
-.nav a{
-  font-family:var(--mono);
-  font-size:.72rem;
-  color:var(--muted);
-  letter-spacing:.12em;
-  text-transform:uppercase;
+.bar-name{
+  font-weight:600;
+  font-size:.95rem;
+  letter-spacing:.02em;
 }
-.nav a:hover{color:var(--ink)}
-.page{
-  max-width:var(--max);
+.bar-nav{
+  display:flex;
+  gap:1.1rem;
+  flex-wrap:wrap;
+}
+.bar-nav a{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  text-decoration:none;
+}
+.bar-nav a:hover{color:var(--accent)}
+
+main{
+  max-width:var(--col);
   margin:0 auto;
   padding:0 var(--pad) 4rem;
-  position:relative;
-  z-index:1;
 }
-.hero{
-  padding:2rem 0 1.6rem;
-}
-.hero-grid{
-  display:grid;
-  grid-template-columns:minmax(320px,.9fr) minmax(0,1.1fr);
-  gap:1.4rem;
-  align-items:stretch;
-}
-.panel{
+
+.intro{padding:2.6rem 0 0}
+.intro-photo{
   border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), var(--panel);
-  box-shadow:var(--shadow);
-}
-.hero-image{
-  padding:1rem;
-  display:grid;
-  gap:.9rem;
-}
-.image-frame{
+  margin-bottom:.6rem;
   overflow:hidden;
-  border-radius:18px;
-  border:1px solid var(--line-strong);
-  background:#cfd4df;
 }
-.image-frame img{
+.intro-photo img{
   width:100%;
-  aspect-ratio:4/5.15;
+  aspect-ratio:4/3;
   object-fit:cover;
-  object-position:center top;
 }
-.image-meta{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:.7rem;
-}
-.mini{
-  padding:.9rem;
-  border:1px solid var(--line);
-  border-radius:14px;
-  background:var(--panel-2);
-}
-.mini small{
-  display:block;
+.caption{
   font-family:var(--mono);
-  font-size:.64rem;
-  letter-spacing:.12em;
+  font-size:.68rem;
+  letter-spacing:.08em;
   text-transform:uppercase;
-  color:var(--soft);
-}
-.mini strong{
-  display:block;
-  margin-top:.3rem;
-  font-size:.92rem;
-}
-.hero-copy{
-  padding:1.3rem;
-  display:flex;
-  flex-direction:column;
-}
-.eyebrow{
-  font-family:var(--mono);
-  font-size:.72rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--accent-2);
-}
-h1{
-  margin-top:1rem;
-  font-size:clamp(2.9rem,6vw,6rem);
-  line-height:.93;
-  letter-spacing:-.06em;
-  max-width:10ch;
-}
-.hero-copy p{
-  margin-top:1.1rem;
-  max-width:60ch;
   color:var(--muted);
-  line-height:1.9;
-  font-size:1rem;
-}
-.hero-actions{
-  margin-top:1.4rem;
-  display:flex;
-  gap:.8rem;
-  flex-wrap:wrap;
-}
-.btn{
-  min-height:46px;
-  padding:0 1.05rem;
-  border-radius:999px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid var(--line-strong);
-  font-family:var(--mono);
-  font-size:.74rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transition:transform .18s ease, border-color .18s ease, background .18s ease;
-}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{
-  background:linear-gradient(180deg, rgba(123,161,255,.28), rgba(123,161,255,.12));
-  color:var(--ink);
-}
-.btn-secondary{
-  background:transparent;
-  color:var(--ink);
-}
-.system-grid{
-  margin-top:1.5rem;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:.8rem;
-}
-.sys-card{
-  padding:1rem 1.05rem;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:var(--panel-2);
-}
-.sys-card small{
-  display:block;
-  font-family:var(--mono);
-  font-size:.65rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--soft);
-}
-.sys-card strong{
-  display:block;
-  margin-top:.35rem;
-  font-size:.96rem;
-}
-.sys-card span{
-  display:block;
-  margin-top:.42rem;
-  color:var(--muted);
-  line-height:1.7;
-  font-size:.9rem;
-}
-.section{
-  padding:4rem 0;
-  border-top:1px solid var(--line);
-}
-.section-head{
-  display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
-  gap:1.8rem;
-  align-items:start;
   margin-bottom:1.8rem;
 }
-.section-kicker{
+
+h1{
+  font-size:clamp(1.9rem,6vw,2.5rem);
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.2;
+}
+.subhead{
+  margin-top:.25rem;
   font-family:var(--mono);
-  font-size:.72rem;
-  letter-spacing:.14em;
+  font-size:.78rem;
+  letter-spacing:.06em;
+  color:var(--ink-soft);
   text-transform:uppercase;
-  color:var(--accent-2);
+}
+
+p{margin-top:1.05rem}
+.lede{margin-top:1.4rem}
+
+dl.facts{
+  margin-top:1.6rem;
+  display:grid;
+  gap:.7rem;
+}
+dl.facts > div{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:1rem;
+  align-items:baseline;
+}
+dl.facts dt{
+  font-family:var(--mono);
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+dl.facts dd{
+  font-size:.95rem;
+  color:var(--ink-soft);
+}
+
+.links-line{
+  margin-top:1.6rem;
+  display:flex;
+  gap:1.4rem;
+  flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:.78rem;
+  letter-spacing:.04em;
+}
+.links-line a{text-decoration:underline}
+
+hr{
+  border:none;
+  border-top:1px solid var(--line);
+  margin:3.2rem 0;
+}
+
+.kicker{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
 }
 h2{
-  margin-top:.7rem;
-  font-size:clamp(2rem,4.2vw,3.9rem);
-  line-height:.95;
-  letter-spacing:-.05em;
-  max-width:12ch;
-}
-.section-head p{
-  color:var(--muted);
-  line-height:1.9;
-}
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:1rem;
-}
-.card,.timeline-panel,.work-panel,.archive-brand,.archive-story,.person-card,.contact-card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:var(--panel);
-}
-.card{
-  padding:1.1rem;
-}
-.card small,.work-panel small,.archive-brand small,.archive-story small,.person-card small,.contact-card small{
-  display:block;
-  font-family:var(--mono);
-  font-size:.66rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--soft);
-}
-.card strong,.person-card strong,.contact-card strong{
-  display:block;
-  margin-top:.35rem;
-  font-size:1rem;
-}
-.card span,.person-card p,.contact-card span{
-  display:block;
-  margin-top:.48rem;
-  color:var(--muted);
-  font-size:.9rem;
-  line-height:1.75;
-}
-.story-layout{
-  display:grid;
-  grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);
-  gap:1rem;
-}
-.timeline-panel{
-  padding:1.2rem;
-}
-.flight-card{
-  padding:1rem 1rem 1.05rem;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:var(--panel-2);
-}
-.flight-card strong{
-  display:block;
-  margin-top:.35rem;
-  font-size:1rem;
-}
-.flight-card p{
   margin-top:.5rem;
-  color:var(--muted);
-  line-height:1.75;
-  font-size:.9rem;
+  font-size:clamp(1.5rem,4.5vw,1.9rem);
+  font-weight:600;
+  letter-spacing:-.01em;
+  line-height:1.25;
+  max-width:22ch;
 }
-.flight-map{
-  margin-top:1rem;
-  border:1px solid var(--line);
-  border-radius:16px;
-  overflow:hidden;
-  background:linear-gradient(180deg, rgba(123,161,255,.09), rgba(123,161,255,.03));
-}
-.flight-map svg{
-  width:100%;
-  display:block;
-}
-.timeline{
-  margin-top:1rem;
-}
-.timeline-item{
-  display:grid;
-  grid-template-columns:120px minmax(0,1fr);
-  gap:1.25rem;
-  padding:1.1rem 0;
+
+.list{margin-top:1.8rem}
+.list-item{
+  padding:1.2rem 0;
   border-top:1px solid var(--line);
 }
-.timeline-item:first-child{border-top:none}
-.timeline-item small{
-  padding-top:.25rem;
-}
-.timeline-item h3{
-  font-size:1.38rem;
-  line-height:1.15;
-}
-.timeline-item p{
-  margin-top:.45rem;
+.list-item:first-child{border-top:none;padding-top:0}
+.list-item .label{
+  font-family:var(--mono);
+  font-size:.68rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
   color:var(--muted);
-  line-height:1.8;
 }
-.media-stack{
+.list-item h3{
+  margin-top:.3rem;
+  font-size:1.12rem;
+  font-weight:600;
+  line-height:1.35;
+}
+.list-item p{margin-top:.45rem;color:var(--ink-soft);font-size:.97rem}
+
+.photo-row{
+  margin-top:1.8rem;
   display:grid;
+  grid-template-columns:1fr 1fr;
   gap:1rem;
 }
-.media-frame{
-  overflow:hidden;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:var(--panel);
-}
-.media-frame img{
-  width:100%;
-  aspect-ratio:1.16/1;
-  object-fit:cover;
-}
-.media-frame figcaption{
-  padding:.85rem 1rem;
+.photo-row figure{margin:0}
+.photo-row .intro-photo{margin-bottom:.45rem}
+.photo-row figcaption{
   font-family:var(--mono);
   font-size:.66rem;
-  color:var(--soft);
-  letter-spacing:.1em;
+  letter-spacing:.06em;
   text-transform:uppercase;
-}
-.work-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-  gap:1rem;
-}
-.work-panel{
-  padding:1.2rem;
-}
-.work-panel h3,.archive-story h3{
-  margin-top:.45rem;
-  font-size:1.56rem;
-  line-height:1.12;
-}
-.work-panel p,.archive-story p,.archive-brand p{
-  margin-top:.6rem;
   color:var(--muted);
-  line-height:1.82;
 }
-.tag-row{
-  margin-top:1rem;
+
+.route{
+  margin-top:1.4rem;
+  font-family:var(--mono);
+  font-size:.85rem;
+  color:var(--ink-soft);
+  letter-spacing:.04em;
+}
+
+.nous-live{
+  margin-top:1.6rem;
   display:flex;
-  flex-wrap:wrap;
-  gap:.55rem;
-}
-.tag{
-  padding:.45rem .68rem;
-  border:1px solid var(--line-strong);
-  border-radius:999px;
-  font-family:var(--mono);
-  font-size:.68rem;
-  color:var(--muted);
-  background:var(--panel-2);
-}
-.archive-grid{
-  display:grid;
-  grid-template-columns:minmax(280px,.78fr) minmax(0,1.22fr);
-  gap:1rem;
-}
-.archive-brand,.archive-story{
-  padding:1.2rem;
-}
-.archive-logo-shell{
-  min-height:190px;
+  align-items:center;
+  gap:.8rem;
+  padding:.85rem 1rem;
   border:1px solid var(--line);
-  border-radius:18px;
-  background:#f7f7f7;
-  display:grid;
-  place-items:center;
-  padding:1rem;
+  text-decoration:none;
 }
-.archive-logo-shell img{
-  max-width:min(100%,380px);
-  max-height:122px;
-  object-fit:contain;
-}
-.archive-logo-fallback{
-  text-align:center;
-  color:#111;
-}
-.archive-logo-fallback strong{
+.nous-live:hover{border-color:var(--accent)}
+.nous-live img{width:30px;height:30px}
+.nous-live .nl-text strong{
   display:block;
-  font-size:1.5rem;
+  font-size:.95rem;
 }
-.archive-logo-fallback span{
+.nous-live .nl-text span{
   display:block;
-  margin-top:.4rem;
+  margin-top:.15rem;
   font-family:var(--mono);
-  font-size:.68rem;
-  color:#666;
-  letter-spacing:.1em;
+  font-size:.7rem;
+  letter-spacing:.06em;
+  color:var(--muted);
   text-transform:uppercase;
 }
-.archive-people{
-  margin-top:1rem;
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:.8rem;
-}
-.archive-person{
-  padding:1rem;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:var(--panel-2);
-}
-.archive-person strong{
-  display:block;
-  margin-top:.32rem;
-  font-size:.98rem;
-}
-.archive-person span{
-  display:block;
-  margin-top:.45rem;
-  color:var(--muted);
-  font-size:.9rem;
-  line-height:1.75;
-}
-.people-grid,.contact-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:1rem;
-}
-.person-card,.contact-card{
-  padding:1.1rem;
-}
-.contact-card{
-  transition:transform .18s ease,border-color .18s ease;
-}
-.contact-card:hover{
-  transform:translateY(-2px);
-  border-color:var(--line-strong);
-}
+
 footer{
-  padding:1.6rem 0 0;
+  border-top:1px solid var(--line);
+  padding:1.6rem var(--pad) 2.4rem;
+  max-width:var(--col);
+  margin:0 auto;
   display:flex;
   justify-content:space-between;
   gap:1rem;
   flex-wrap:wrap;
-  color:var(--soft);
   font-family:var(--mono);
-  font-size:.72rem;
-  letter-spacing:.08em;
+  font-size:.7rem;
+  letter-spacing:.06em;
   text-transform:uppercase;
+  color:var(--muted);
 }
-.reveal{
-  opacity:0;
-  transform:translateY(18px);
-  transition:opacity .7s ease,transform .7s ease;
-}
-.reveal.in{
-  opacity:1;
-  transform:none;
-}
-@media (max-width:1080px){
-  .hero-grid,.section-head,.story-layout,.work-grid,.archive-grid,.card-grid,.people-grid,.contact-grid{grid-template-columns:1fr}
-}
-@media (max-width:720px){
-  .nav a:not(.btn-link){display:none}
-  .system-grid,.image-meta,.archive-people{grid-template-columns:1fr}
-  .timeline-item{grid-template-columns:1fr}
+
+@media (max-width:600px){
+  dl.facts > div{grid-template-columns:1fr}
+  dl.facts dt{margin-bottom:.1rem}
+  .photo-row{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="#top">
-        <div class="brand-mark">128482</div>
-        <div class="brand-copy">
-          <strong>Ali Guenbour</strong>
-          <span>CYPHr007 / Systems builder</span>
-        </div>
-      </a>
-      <nav class="nav">
+  <header class="bar">
+    <div class="bar-inner">
+      <a class="bar-name" href="#top">Ali Guenbour</a>
+      <nav class="bar-nav">
         <a href="#story">Trajectory</a>
         <a href="#work">NOUS</a>
-        <a href="#archive">Human Archive</a>
+        <a href="#archive">Archive</a>
         <a href="#people">People</a>
         <a href="#connect">Links</a>
       </nav>
     </div>
   </header>
 
-  <main class="page">
-    <section class="hero" id="top">
-      <div class="hero-grid">
-        <div class="panel hero-image">
-          <div class="image-frame">
-            <img id="portraitImage" src="crimefile-mugshot.png" alt="Ali Guenbour portrait">
-          </div>
-          <div class="image-meta">
-            <div class="mini">
-              <small>Alias</small>
-              <strong>CYPHr007</strong>
-            </div>
-            <div class="mini">
-              <small>Reference</small>
-              <strong>128482</strong>
-            </div>
-            <div class="mini">
-              <small>Status</small>
-              <strong>Active</strong>
-            </div>
-          </div>
-        </div>
+  <main>
+    <section class="intro" id="top">
+      <div class="intro-photo">
+        <img src="firstdayinsz.jpg" alt="Ali Guenbour, first day in Shenzhen">
+      </div>
+      <div class="caption">First day in Shenzhen, the city that changed the tempo</div>
 
-        <div class="panel hero-copy">
-          <div class="eyebrow">Personal system map</div>
-          <h1>I like hard systems, clear signals, and work that has weight.</h1>
-          <p>
-            I am Ali Guenbour, also known as CYPHr007. I grew up in El Jadida, moved to Shenzhen at 18,
-            studied Computer Science and Engineering at CUHK Shenzhen, and built my first serious company around a simple idea:
-            machines reveal what is coming before failure, if you learn how to read them.
-          </p>
-          <p>
-            That company began as PILAR and became NOUS. This page is a cleaner map of the person, the work,
-            and the people who shaped the direction.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#work">Open work log</a>
-            <a class="btn btn-secondary" href="https://github.com/CYPHr007/PILAR" target="_blank" rel="noopener">View repo</a>
-          </div>
-          <div class="system-grid">
-            <div class="sys-card">
-              <small>Location</small>
-              <strong>Shenzhen, China</strong>
-              <span>Where the pressure, speed, and opportunity all felt aligned.</span>
-            </div>
-            <div class="sys-card">
-              <small>Main build</small>
-              <strong>NOUS / formerly PILAR</strong>
-              <span>Predictive maintenance, local AI, and industrial systems thinking.</span>
-            </div>
-            <div class="sys-card">
-              <small>Background</small>
-              <strong>Morocco to engineering</strong>
-              <span>A fast transition from no-code beginnings to shipping real products.</span>
-            </div>
-            <div class="sys-card">
-              <small>Current bias</small>
-              <strong>Hardware, ML, signal quality</strong>
-              <span>Work that goes beyond interface and touches reality.</span>
-            </div>
-          </div>
+      <h1>Ali Guenbour</h1>
+      <div class="subhead">CYPHr007 / builder, Shenzhen</div>
+
+      <p class="lede">
+        I grew up in El Jadida, Morocco, moved to Shenzhen at eighteen, and studied Computer Science and
+        Engineering at CUHK Shenzhen. My first serious company started from a simple observation: machines
+        show what is coming before they fail, if you learn how to read them. That company began as PILAR
+        and is now NOUS.
+      </p>
+      <p>
+        This page is a plain map of the person, the work, and the people who shaped the direction.
+      </p>
+
+      <dl class="facts">
+        <div>
+          <dt>Based in</dt>
+          <dd>Shenzhen, China</dd>
+        </div>
+        <div>
+          <dt>Building</dt>
+          <dd>NOUS, formerly PILAR &mdash; maintenance intelligence</dd>
+        </div>
+        <div>
+          <dt>From</dt>
+          <dd>El Jadida, Morocco</dd>
+        </div>
+        <div>
+          <dt>Into right now</dt>
+          <dd>Hardware, machine learning, signal quality</dd>
+        </div>
+      </dl>
+
+      <div class="links-line">
+        <a href="#work">Read about NOUS &rarr;</a>
+        <a href="https://github.com/CYPHr007/PILAR" target="_blank" rel="noopener">View the code &rarr;</a>
+      </div>
+    </section>
+
+    <hr>
+
+    <section id="profile">
+      <div class="kicker">How I work</div>
+      <h2>A few things that describe how I think.</h2>
+      <p>
+        Not a soft portfolio list. Just the honest shape of how I got here and what I tend to build.
+      </p>
+
+      <div class="list">
+        <div class="list-item">
+          <div class="label">Origin</div>
+          <h3>El Jadida, Morocco</h3>
+          <p>French high school background, then a sharp pivot into engineering, software, and startups.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Education</div>
+          <h3>CUHK Shenzhen</h3>
+          <p>Computer Science and Engineering, while learning by building in parallel.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Pattern</div>
+          <h3>Fast learning under pressure</h3>
+          <p>From zero coding background to machine learning, desktop tools, and product systems in under a year.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Bias</div>
+          <h3>Real systems over abstraction</h3>
+          <p>Factories, hardware, signal analysis, robotics, and problems that exist outside a browser tab.</p>
         </div>
       </div>
     </section>
 
-    <section class="section reveal" id="profile">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">Profile</div>
-          <h2>Four vectors that describe me best.</h2>
+    <hr>
+
+    <section id="story">
+      <div class="kicker">Trajectory</div>
+      <h2>The move that rewired the system.</h2>
+      <p>
+        The story makes more sense as a sequence of inputs and outputs than as a motivational speech.
+        A few environments changed the direction of everything.
+      </p>
+
+      <div class="route">El Jadida &rarr; Shenzhen, age 18</div>
+
+      <div class="list">
+        <div class="list-item">
+          <div class="label">Before code</div>
+          <h3>The early years</h3>
+          <p>Gaming was a large part of my world. Looking back, it taught patience, iteration, and how to stay with difficult things long enough to get better.</p>
         </div>
-        <p>
-          I wanted this version to feel more like a system dashboard than a soft portfolio.
-          The point is not decoration. The point is to show the structure of how I think and what I tend to build.
-        </p>
+        <div class="list-item">
+          <div class="label">First signal</div>
+          <h3>Kapachim Maroc</h3>
+          <p>An internship in a chemical manufacturing plant gave me my first close view of machines, breakdowns, and the cost of downtime. That is where the seed of PILAR began.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Turning point</div>
+          <h3>Moving to Shenzhen at 18</h3>
+          <p>I left home and moved alone to China for CUHK Shenzhen. The distance was real, but it put me inside the environment where I could actually start building seriously.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Acceleration</div>
+          <h3>Learning fast enough to ship</h3>
+          <p>In less than a year I moved from no coding background to building products, training models, packaging desktop software, and working with AI systems under real constraints.</p>
+        </div>
       </div>
 
-      <div class="card-grid">
-        <div class="card">
-          <small>Origin</small>
-          <strong>El Jadida, Morocco</strong>
-          <span>French high school background, then a sharp pivot into engineering, software, and startups.</span>
-        </div>
-        <div class="card">
-          <small>Education</small>
-          <strong>CUHK Shenzhen</strong>
-          <span>Computer Science and Engineering while learning by building in parallel.</span>
-        </div>
-        <div class="card">
-          <small>Pattern</small>
-          <strong>Fast learning under pressure</strong>
-          <span>From zero code background to ML, desktop tools, and product systems in under a year.</span>
-        </div>
-        <div class="card">
-          <small>Bias</small>
-          <strong>Real systems over abstraction</strong>
-          <span>Factories, hardware, signal analysis, robotics, and problems that exist outside a browser tab.</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section reveal" id="story">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">Trajectory</div>
-          <h2>The move that rewired the system.</h2>
-        </div>
-        <p>
-          The story makes more sense as a sequence of inputs and outputs than as a motivational speech.
-          A few environments changed the direction of everything.
-        </p>
-      </div>
-
-      <div class="story-layout">
-        <div class="timeline-panel">
-          <div class="flight-card">
-            <small>Route</small>
-            <strong>El Jadida to Shenzhen</strong>
-            <p>One of the most important transitions in my life. A long move, a hard reset, and the beginning of a much higher-speed environment.</p>
-            <div class="flight-map" aria-hidden="true">
-              <svg viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <filter id="softPlane" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="2.2" result="blur"/>
-                    <feMerge>
-                      <feMergeNode in="blur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
-                <path d="M88 156C182 128 248 86 344 82C454 78 536 136 672 88" stroke="rgba(255,255,255,.12)" stroke-width="2"/>
-                <path d="M88 156C182 128 248 86 344 82C454 78 536 136 672 88" stroke="#7ba1ff" stroke-width="2.5" stroke-dasharray="8 10" stroke-linecap="round"/>
-                <circle cx="88" cy="156" r="6.5" fill="#edf2ff"/>
-                <circle cx="672" cy="88" r="6.5" fill="#5de4c7"/>
-                <text x="70" y="184" fill="#98a4b7" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="1.5">EL JADIDA</text>
-                <text x="615" y="62" fill="#98a4b7" font-family="'IBM Plex Mono', monospace" font-size="14" letter-spacing="1.5">SHENZHEN</text>
-                <g filter="url(#softPlane)">
-                  <path d="M0 -10L20 0L0 10L4 2L-16 2L-16 -2L4 -2L0 -10Z" fill="#edf2ff">
-                    <animateMotion dur="5.8s" repeatCount="indefinite" rotate="auto">
-                      <mpath href="#flightMotionPath"/>
-                    </animateMotion>
-                  </path>
-                </g>
-                <path id="flightMotionPath" d="M88 156C182 128 248 86 344 82C454 78 536 136 672 88" fill="none" stroke="transparent"/>
-              </svg>
-            </div>
-          </div>
-
-          <div class="timeline">
-            <div class="timeline-item">
-              <small>Before code</small>
-              <div>
-                <h3>The early years</h3>
-                <p>Gaming was a large part of my world. Looking back, it taught patience, iteration, and how to stay with difficult things long enough to get better.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <small>First signal</small>
-              <div>
-                <h3>Kapachim Maroc</h3>
-                <p>An internship in a chemical manufacturing plant gave me my first close view of machines, breakdowns, and the cost of downtime. That is where the seed of PILAR began.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <small>Turning point</small>
-              <div>
-                <h3>Moving to Shenzhen at 18</h3>
-                <p>I left home and moved alone to China for CUHK Shenzhen. The distance was real, but it put me inside the environment where I could actually start building seriously.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <small>Acceleration</small>
-              <div>
-                <h3>Learning fast enough to ship</h3>
-                <p>In less than a year I moved from no coding background to building products, training models, packaging desktop software, and working with AI systems under real constraints.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="media-stack">
-          <figure class="media-frame">
+      <div class="photo-row">
+        <figure>
+          <div class="intro-photo">
             <img src="IMG-20220331-WA0012.jpg" alt="Kapachim Maroc internship">
-            <figcaption>Kapachim Maroc / origin of the first industrial thesis</figcaption>
-          </figure>
-          <figure class="media-frame">
-            <img src="firstdayinsz.jpg" alt="First day in Shenzhen">
-            <figcaption>Shenzhen / first day in the city that changed the tempo</figcaption>
-          </figure>
-          <figure class="media-frame">
+          </div>
+          <figcaption>Kapachim Maroc, origin of the first industrial thesis</figcaption>
+        </figure>
+        <figure>
+          <div class="intro-photo">
             <img src="toubkal3.jpg" alt="Mount Toubkal">
-            <figcaption>Toubkal / a useful reminder that endurance showed up early</figcaption>
-          </figure>
-        </div>
+          </div>
+          <figcaption>Toubkal, endurance showed up early</figcaption>
+        </figure>
       </div>
     </section>
 
-    <section class="section reveal" id="work">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">NOUS</div>
-          <h2>From predictive maintenance to maintenance intelligence.</h2>
-        </div>
-        <p>
-          My first business started as PILAR and became NOUS. The question that started it stayed the same,
-          if machines show signs before failure, why are those signs still missed, but the answer has grown.
-          NOUS is no longer just a model that predicts. It is becoming the memory layer for a plant: every
-          recommendation, every decision, and every outcome, recorded and built on any industrial machine.
-        </p>
-      </div>
+    <hr>
 
-      <div class="work-grid">
-        <div class="work-panel">
-          <small>Main build</small>
-          <h3>Maintenance intelligence, not just predictive maintenance.</h3>
-          <p>
-            NOUS started from what I saw on the industrial side: signal before failure, missed every time.
-            That part still holds. What changed is the scope. NOUS is machine-agnostic, it retrains on any
-            equipment's real data, and it now carries the decisions a team makes, not just the warnings it gives.
-            From reactive to structured is the short version of where this is going.
-          </p>
-          <div class="tag-row">
-            <span class="tag">Python</span>
-            <span class="tag">Flask</span>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Desktop App</span>
-            <span class="tag">Offline AI</span>
-            <span class="tag">Industrial Systems</span>
-          </div>
-        </div>
+    <section id="work">
+      <div class="kicker">NOUS</div>
+      <h2>From predictive maintenance to maintenance intelligence.</h2>
+      <p>
+        My first business started as PILAR and became NOUS. The question that started it stayed the same:
+        if machines show signs before failure, why are those signs still missed? The answer has grown.
+        NOUS is no longer just a model that predicts. It is becoming the memory layer for a plant, every
+        recommendation, every decision, and every outcome, recorded, and built for any industrial machine.
+      </p>
+      <p>
+        NOUS started from what I saw on the industrial side: signal before failure, missed every time. That
+        part still holds. What changed is the scope. NOUS is machine-agnostic, it retrains on any equipment's
+        real data, and it now carries the decisions a team makes, not just the warnings it gives. From
+        reactive to structured is the short version of where this is going.
+      </p>
+      <p>
+        The system matters to me because it is not abstract. It connects software, machine signals, failure
+        patterns, and the people who actually need to decide whether something is becoming dangerous.
+        Confidence that is earned, not assumed, even when that means the system saying it does not know yet.
+      </p>
 
-        <div class="work-panel">
-          <small>Design logic</small>
-          <h3>Local, readable, and close to the operator.</h3>
-          <p>
-            The system matters to me because it is not abstract. It connects software, machine signals,
-            failure patterns, and the people who actually need to decide whether something is becoming dangerous.
-            Confidence that is earned, not assumed, even when that means the system saying it does not know yet.
-          </p>
-          <div class="tag-row">
-            <span class="tag">PILAR</span>
-            <span class="tag">NOUS</span>
-            <span class="tag">On-premise bias</span>
-            <span class="tag">Signal quality</span>
-          </div>
-        </div>
-      </div>
-
-      <a class="contact-card" href="https://trypilar.com" target="_blank" rel="noopener" style="margin-top:1rem;display:flex;align-items:center;gap:1.1rem">
-        <div class="archive-logo-shell" style="min-height:auto;width:64px;height:64px;padding:.7rem;border-radius:14px;flex-shrink:0">
-          <img src="nous-logo.png" alt="NOUS logo" style="max-height:100%;max-width:100%">
-        </div>
-        <div>
-          <small>Live product</small>
+      <a class="nous-live" href="https://trypilar.com" target="_blank" rel="noopener">
+        <img src="nous-logo.png" alt="NOUS logo">
+        <div class="nl-text">
           <strong>trypilar.com</strong>
-          <span>NOUS today: maintenance intelligence for any industrial machine.</span>
+          <span>NOUS today: maintenance intelligence for any industrial machine</span>
         </div>
       </a>
     </section>
 
-    <section class="section reveal" id="archive">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">Human Archive</div>
-          <h2>A short node, still on the map.</h2>
-        </div>
-        <p>
-          Human Archive gets its own section even though I was only there about a month. In that time it pushed me
-          further into hardware and motion capture, and into the idea that model quality starts much earlier,
-          at the level of how data is physically collected.
-        </p>
-      </div>
+    <hr>
 
-      <div class="archive-grid">
-        <div class="archive-brand">
-          <small>Organization</small>
-          <div class="archive-logo-shell">
-            <img id="archiveLogo" src="human-archive-logo.png" alt="Human Archive logo">
-            <div id="archiveLogoFallback" class="archive-logo-fallback" hidden>
-              <strong>Human Archive</strong>
-              <span>Logo area wired for your provided image</span>
-            </div>
-          </div>
-          <p>
-            This is where hardware, capture systems, and data quality all became much more concrete for me.
-          </p>
-        </div>
+    <section id="archive">
+      <div class="kicker">Human Archive</div>
+      <h2>A short node, still on the map.</h2>
+      <p>
+        Human Archive gets its own section even though I was only there about a month. In that time it
+        pushed me further into hardware and motion capture, and into the idea that model quality starts
+        much earlier, at the level of how data is physically collected.
+      </p>
+      <p>
+        Around Human Archive, the work became more physical: rigs, motion, synchronization, and what it
+        takes to collect data that is actually good enough to matter downstream. I moved on after about a
+        month, back to NOUS, but the shift in how I think about data collection stayed with me.
+      </p>
 
-        <div class="archive-story">
-          <small>Past chapter, about a month</small>
-          <h3>Working closer to hardware changed the perspective.</h3>
-          <p>
-            Around Human Archive, the work became more physical: rigs, motion, synchronization, and what it takes
-            to collect data that is actually good enough to matter downstream. I moved on after about a month,
-            back to NOUS, but the shift in how I think about data collection stayed with me.
-          </p>
-          <p>
-            Raj and Shloke belong in a special place here because they trusted me early and gave me access to a more serious level of work.
-            That trust changed the standard I hold myself to.
-          </p>
-          <div class="archive-people">
-            <div class="archive-person">
-              <small>Person</small>
-              <strong>Raj</strong>
-              <span>A strong part of why this chapter matters to me. Serious trust, serious expectations, serious work.</span>
-            </div>
-            <div class="archive-person">
-              <small>Person</small>
-              <strong>Shloke</strong>
-              <span>Connected to the hardware side of the story and to the environment that made this phase feel concrete and demanding.</span>
-            </div>
-          </div>
+      <div class="list">
+        <div class="list-item">
+          <div class="label">Person</div>
+          <h3>Raj</h3>
+          <p>A strong part of why this chapter matters to me. Serious trust, serious expectations, serious work.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Person</div>
+          <h3>Shloke</h3>
+          <p>Connected to the hardware side of the story, and to the environment that made this phase feel concrete and demanding.</p>
         </div>
       </div>
     </section>
 
-    <section class="section reveal" id="people">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">People</div>
-          <h2>The people around the work.</h2>
-        </div>
-        <p>
-          A good personal site should say clearly who mattered. Some people changed the direction, others changed the level of trust and responsibility.
-        </p>
+    <hr>
+
+    <section id="people">
+      <div class="kicker">People</div>
+      <h2>The people around the work.</h2>
+      <p>
+        A good personal page should say clearly who mattered. Some people changed the direction, others
+        changed the level of trust and responsibility.
+      </p>
+
+      <div class="photo-row" style="grid-template-columns:1fr">
+        <figure>
+          <div class="intro-photo" style="max-width:280px">
+            <img src="rayanmyfriend.jpg" alt="Rayan">
+          </div>
+          <figcaption>Rayan</figcaption>
+        </figure>
       </div>
 
-      <div class="people-grid">
-        <div class="person-card">
-          <small>Friend</small>
-          <strong>Rayan</strong>
+      <div class="list">
+        <div class="list-item">
+          <div class="label">Friend</div>
+          <h3>Rayan</h3>
           <p>He pushed me toward CUHK Shenzhen, opened the door to tech, and helped me see a much larger world than the one I started in.</p>
         </div>
-        <div class="person-card">
-          <small>Circle</small>
-          <strong>The dorm brothers</strong>
+        <div class="list-item">
+          <div class="label">Circle</div>
+          <h3>The dorm brothers</h3>
           <p>The people who made a foreign place feel livable while everything else was changing quickly and the system was still unstable.</p>
         </div>
-        <div class="person-card">
-          <small>Trust</small>
-          <strong>Raj and Shloke</strong>
+        <div class="list-item">
+          <div class="label">Trust</div>
+          <h3>Raj and Shloke</h3>
           <p>They trusted me with real work early, especially around hardware, and that trust sharpened my own sense of seriousness.</p>
         </div>
       </div>
     </section>
 
-    <section class="section reveal" id="connect">
-      <div class="section-head">
-        <div>
-          <div class="section-kicker">Links</div>
-          <h2>Where to find me.</h2>
-        </div>
-        <p>
-          If you want to talk about NOUS, manufacturing, robotics, hardware, Shenzhen, or building quickly from scratch, these are the cleanest paths.
-        </p>
-      </div>
+    <hr>
 
-      <div class="contact-grid">
-        <a class="contact-card" href="https://github.com/CYPHr007" target="_blank" rel="noopener">
-          <small>GitHub</small>
-          <strong>CYPHr007</strong>
-          <span>Code, products, and public artifacts.</span>
-        </a>
-        <a class="contact-card" href="https://x.com/aliguenbour" target="_blank" rel="noopener">
-          <small>X</small>
-          <strong>@aliguenbour</strong>
-          <span>Current work, thoughts, and updates.</span>
-        </a>
-        <a class="contact-card" href="https://www.linkedin.com/in/ali-guenbour-1525772b5" target="_blank" rel="noopener">
-          <small>LinkedIn</small>
-          <strong>Ali Guenbour</strong>
-          <span>Professional trace and background.</span>
-        </a>
+    <section id="connect">
+      <div class="kicker">Links</div>
+      <h2>Where to find me.</h2>
+      <p>
+        If you want to talk about NOUS, manufacturing, robotics, hardware, Shenzhen, or building quickly
+        from scratch, these are the cleanest paths.
+      </p>
+
+      <div class="list">
+        <div class="list-item">
+          <div class="label">GitHub</div>
+          <h3><a href="https://github.com/CYPHr007" target="_blank" rel="noopener">CYPHr007</a></h3>
+          <p>Code, products, and public artifacts.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">X</div>
+          <h3><a href="https://x.com/aliguenbour" target="_blank" rel="noopener">@aliguenbour</a></h3>
+          <p>Current work, thoughts, and updates.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">LinkedIn</div>
+          <h3><a href="https://www.linkedin.com/in/ali-guenbour-1525772b5" target="_blank" rel="noopener">Ali Guenbour</a></h3>
+          <p>Professional trace and background.</p>
+        </div>
+        <div class="list-item">
+          <div class="label">Email</div>
+          <h3><a href="mailto:aliguenbou07r@gmail.com">aliguenbou07r@gmail.com</a></h3>
+          <p>The most direct way to reach me.</p>
+        </div>
       </div>
     </section>
-
-    <footer>
-      <div>Ali Guenbour / CYPHr007</div>
-      <div>NOUS was first called PILAR</div>
-    </footer>
   </main>
 
-<script>
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("in");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll(".reveal").forEach((node) => revealObserver.observe(node));
-
-const portraitImage = document.getElementById("portraitImage");
-const portraitSources = [
-  "crimefile-mugshot.png",
-  "crimefile-mugshot.jpg",
-  "crimefile-mugshot.jpeg",
-  "firstdayinsz.jpg",
-  "IMG-20220331-WA0012.jpg"
-];
-let portraitIndex = 0;
-portraitImage.addEventListener("error", () => {
-  portraitIndex += 1;
-  if (portraitIndex < portraitSources.length) {
-    portraitImage.src = portraitSources[portraitIndex];
-  }
-});
-portraitImage.src = portraitSources[portraitIndex];
-
-const archiveLogo = document.getElementById("archiveLogo");
-const archiveLogoFallback = document.getElementById("archiveLogoFallback");
-if (archiveLogo) {
-  archiveLogo.addEventListener("error", () => {
-    archiveLogo.hidden = true;
-    if (archiveLogoFallback) archiveLogoFallback.hidden = false;
-  });
-}
-</script>
+  <footer>
+    <div>Ali Guenbour / CYPHr007</div>
+    <div>NOUS was first called PILAR</div>
+  </footer>
 </body>
 </html>

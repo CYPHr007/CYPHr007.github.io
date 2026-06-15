@@ -84,6 +84,11 @@ main{
   width:100%;
   aspect-ratio:4/3;
   object-fit:cover;
+  cursor:zoom-in;
+  transition:transform .5s ease;
+}
+.intro-photo:hover img{
+  transform:scale(1.06);
 }
 .caption{
   font-family:var(--mono);
@@ -258,6 +263,24 @@ footer{
   dl.facts > div{grid-template-columns:1fr}
   dl.facts dt{margin-bottom:.1rem}
   .photo-row{grid-template-columns:1fr}
+}
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:5vw;
+  background:rgba(43,40,37,.92);
+  cursor:zoom-out;
+  z-index:100;
+}
+.lightbox.is-open{display:flex}
+.lightbox img{
+  max-width:100%;
+  max-height:100%;
+  border:1px solid var(--line);
 }
 </style>
 </head>
@@ -447,23 +470,14 @@ footer{
         much earlier, at the level of how data is physically collected.
       </p>
       <p>
-        Around Human Archive, the work became more physical: rigs, motion, synchronization, and what it
-        takes to collect data that is actually good enough to matter downstream. I moved on after about a
-        month, back to NOUS, but the shift in how I think about data collection stayed with me.
+        Human Archive builds hardware rigs for full-body motion capture, recording how people actually move
+        so that data can be used to train robots. Around it, the work became more physical: rigs, motion,
+        synchronization, and what it takes to collect data that is actually good enough to matter downstream.
       </p>
-
-      <div class="list">
-        <div class="list-item">
-          <div class="label">Person</div>
-          <h3>Raj</h3>
-          <p>A strong part of why this chapter matters to me. Serious trust, serious expectations, serious work.</p>
-        </div>
-        <div class="list-item">
-          <div class="label">Person</div>
-          <h3>Shloke</h3>
-          <p>Connected to the hardware side of the story, and to the environment that made this phase feel concrete and demanding.</p>
-        </div>
-      </div>
+      <p>
+        I moved on after about a month, back to NOUS, but the shift in how I think about data collection,
+        that quality starts at the rig and the sensor, not in the model, stayed with me.
+      </p>
     </section>
 
     <hr>
@@ -495,11 +509,6 @@ footer{
           <div class="label">Circle</div>
           <h3>The dorm brothers</h3>
           <p>The people who made a foreign place feel livable while everything else was changing quickly and the system was still unstable.</p>
-        </div>
-        <div class="list-item">
-          <div class="label">Trust</div>
-          <h3>Raj and Shloke</h3>
-          <p>They trusted me with real work early, especially around hardware, and that trust sharpened my own sense of seriousness.</p>
         </div>
       </div>
     </section>
@@ -543,5 +552,24 @@ footer{
     <div>Ali Guenbour / CYPHr007</div>
     <div>NOUS was first called PILAR</div>
   </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.intro-photo img').forEach(function (img) {
+      img.addEventListener('click', function () {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('is-open');
+      });
+    });
+    lightbox.addEventListener('click', function () {
+      lightbox.classList.remove('is-open');
+    });
+  </script>
 </body>
 </html>

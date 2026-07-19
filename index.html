@@ -364,7 +364,8 @@ hr.reveal.is-visible{width:168px}
 .zeno-ach.running .legB{animation:strideB .46s steps(1,end) infinite}
 @keyframes strideA{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
 @keyframes strideB{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
-@media (max-width:1100px){.zeno-fig,.zeno-note{display:none}}
+@media (max-width:900px){.zeno-fig{display:none}}
+@media (max-width:1100px){.zeno-note{display:none}}
 
 @media (prefers-reduced-motion:reduce){
   .intro > *{animation:none}
@@ -753,7 +754,7 @@ hr.reveal.is-visible{width:168px}
     // gap keeps halving as you scroll — but he never quite catches it.
     (function () {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if (window.innerWidth < 1100) return;
+      if (window.innerWidth < 900) return;
       var ACC = '#9a5b3f', PAPER = '#f7f4ee';
 
       var tor = document.createElement('div');
@@ -839,6 +840,9 @@ hr.reveal.is-visible{width:168px}
         var max = doc.scrollHeight - window.innerHeight;
         var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
         var vw = window.innerWidth, vh = window.innerHeight;
+        // the scene scales with the screen; labels need real margin room
+        var s = Math.max(0.7, Math.min(1.18, vw / 1440));
+        var showLabels = vw >= 1100;
 
         // which way is the reader going? (smoothed, with hysteresis)
         var rawDir = window.scrollY - lastSY; lastSY = window.scrollY;
@@ -848,12 +852,12 @@ hr.reveal.is-visible{width:168px}
         var down = (mode === 'down');
 
         // the tortoise leads, pacing the page, with a slow plodding waddle
-        var torX = vw - 104 + Math.sin(t * 0.3) * 5;
+        var torX = vw - 104 * s + Math.sin(t * 0.3) * 5;
         var torY = vh * (0.16 + 0.62 * p) + Math.sin(t * 0.7) * 3;
         // Achilles behind: the gap keeps halving with progress — never zero
         var gap = vh * 0.3 * Math.pow(2, -5 * p);
-        var achX = vw - 106 + Math.sin(t * 0.42 + 2) * 7;
-        var achY = torY - 50 - gap;
+        var achX = vw - 106 * s + Math.sin(t * 0.42 + 2) * 7;
+        var achY = torY - 50 * s - gap;
 
         tx += (torX - tx) * 0.05;  ty += (torY - ty) * 0.05;
         axp += (achX - axp) * 0.07; ayp += (achY - ayp) * 0.07;
@@ -863,8 +867,8 @@ hr.reveal.is-visible{width:168px}
         var tLean = Math.max(-6, Math.min(6, tVel * 2.5)) + Math.sin(t * 1.1) * 1.5;
         var aLean = Math.max(-12, Math.min(12, aVel * 3)) + 4;   // always leaning into the chase
 
-        tor.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) rotate(' + tLean.toFixed(2) + 'deg)';
-        ach.style.transform = 'translate(' + axp.toFixed(1) + 'px,' + ayp.toFixed(1) + 'px) rotate(' + aLean.toFixed(2) + 'deg)';
+        tor.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) rotate(' + tLean.toFixed(2) + 'deg) scale(' + s.toFixed(3) + ')';
+        ach.style.transform = 'translate(' + axp.toFixed(1) + 'px,' + ayp.toFixed(1) + 'px) rotate(' + aLean.toFixed(2) + 'deg) scale(' + s.toFixed(3) + ')';
 
         // the race lives on the way down; the arrow owns the way up
         tor.style.opacity = down ? '.62' : '0';
@@ -872,8 +876,8 @@ hr.reveal.is-visible{width:168px}
 
         // caption fades in near the end of the race
         note.style.left = (vw - 236) + 'px';
-        note.style.top = (ty + 34) + 'px';
-        note.style.opacity = (down && p > 0.86) ? '.85' : '0';
+        note.style.top = (ty + 34 * s) + 'px';
+        note.style.opacity = (showLabels && down && p > 0.86) ? '.85' : '0';
 
         // left margin: the series on the way down, the dichotomy on the way up
         var leftMargin = Math.max(20, (vw - 660) / 2 - 236);
@@ -888,28 +892,28 @@ hr.reveal.is-visible{width:168px}
         }
         sum.style.left = leftMargin + 'px';
         sum.style.top = (ty + 6) + 'px';
-        sum.style.opacity = p > 0.05 ? '.75' : '0';
+        sum.style.opacity = (showLabels && p > 0.05) ? '.75' : '0';
 
         // right margin: Achilles' remaining gap, halving as he goes
         var n = Math.round(5 * p);
         gapLabel.textContent = n >= 1 ? 'gap = 1/' + Math.pow(2, n) : '';
         gapLabel.style.left = (axp - 74) + 'px';
-        gapLabel.style.top = (ayp + 16) + 'px';
-        gapLabel.style.opacity = (down && p > 0.12 && p < 0.97) ? '.7' : '0';
+        gapLabel.style.top = (ayp + 16 * s) + 'px';
+        gapLabel.style.opacity = (showLabels && down && p > 0.12 && p < 0.97) ? '.7' : '0';
 
         // the arrow: leads the reader home, but only ever as a still frame —
         // it jumps between positions and is motionless in between
         var bucket = Math.floor(now / 300);
         if (bucket !== lastBucket) {
           lastBucket = bucket;
-          arrowX = vw - 100;
+          arrowX = vw - 100 * s;
           arrowY = vh * (0.14 + 0.55 * p);
         }
-        arrow.style.transform = 'translate(' + arrowX.toFixed(1) + 'px,' + arrowY.toFixed(1) + 'px)';
+        arrow.style.transform = 'translate(' + arrowX.toFixed(1) + 'px,' + arrowY.toFixed(1) + 'px) scale(' + s.toFixed(3) + ')';
         arrow.style.opacity = (!down && p > 0.03) ? '.7' : '0';
         arrowNote.style.left = (vw - 252) + 'px';
-        arrowNote.style.top = (arrowY + 60) + 'px';
-        arrowNote.style.opacity = (!down && p > 0.06) ? '.8' : '0';
+        arrowNote.style.top = (arrowY + 60 * s) + 'px';
+        arrowNote.style.opacity = (showLabels && !down && p > 0.06) ? '.8' : '0';
 
         requestAnimationFrame(frame);
       }

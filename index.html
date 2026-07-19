@@ -302,6 +302,35 @@ footer{
   max-height:100%;
   border:1px solid var(--line);
 }
+
+/* entrance on load */
+.intro > *{animation:settle .9s cubic-bezier(.2,.7,.2,1) both}
+.intro > *:nth-child(2){animation-delay:.08s}
+.intro > *:nth-child(3){animation-delay:.14s}
+.intro > *:nth-child(4){animation-delay:.2s}
+.intro > *:nth-child(5){animation-delay:.26s}
+.intro > *:nth-child(6){animation-delay:.32s}
+.intro > *:nth-child(7){animation-delay:.38s}
+.intro > *:nth-child(8){animation-delay:.44s}
+@keyframes settle{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* scroll reveal — applied by the script at the bottom; content stays
+   visible if JS never runs */
+.reveal{opacity:0;transform:translateY(16px);
+  transition:opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1);
+  transition-delay:var(--reveal-delay,0s)}
+.reveal.is-visible{opacity:1;transform:none}
+/* meander bands draw themselves in */
+hr{transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+hr.reveal{opacity:.5;transform:none;width:0}
+hr.reveal.is-visible{width:168px}
+
+@media (prefers-reduced-motion:reduce){
+  .intro > *{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  hr.reveal{width:168px}
+  .intro-photo img{transition:none}
+}
 </style>
 </head>
 <body>
@@ -593,6 +622,35 @@ footer{
     lightbox.addEventListener('click', function () {
       lightbox.classList.remove('is-open');
     });
+
+    // Scroll reveal — sections rise into view as you read
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) return;
+      var groups = [
+        'section .kicker, section > h2, section > p, section > .route',
+        '.list-item',
+        '.photo-row figure',
+        'dl.facts > div',
+        '.links-line, .nous-live',
+        'hr'
+      ];
+      var targets = [];
+      groups.forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el, i) {
+          if (el.closest('.intro')) return;   // intro has its own entrance
+          el.classList.add('reveal');
+          el.style.setProperty('--reveal-delay', Math.min(i * 70, 280) + 'ms');
+          targets.push(el);
+        });
+      });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      targets.forEach(function (el) { io.observe(el); });
+    })();
   </script>
 </body>
 </html>

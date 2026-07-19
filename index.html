@@ -160,7 +160,8 @@ dl.facts dd{
 }
 .links-line a{text-decoration:underline}
 
-/* Greek meander section break */
+/* Greek meander section break — the pattern flows through the band like
+   the river current it was drawn from */
 hr{
   border:none;
   height:12px;
@@ -169,8 +170,13 @@ hr{
   opacity:.5;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M0 13 H14 M0 13 V1 H13 V9 H5 V5 H9" fill="none" stroke="%239a5b3f" stroke-width="1.3"/></svg>');
   background-repeat:repeat-x;
-  background-position:center;
+  background-position:0 center;
   background-size:auto 12px;
+  animation:meander-flow 2.6s linear infinite;
+}
+@keyframes meander-flow{
+  from{background-position-x:0}
+  to{background-position-x:12px}
 }
 
 .kicker{
@@ -370,6 +376,7 @@ hr.reveal.is-visible{width:168px}
 @media (prefers-reduced-motion:reduce){
   .intro > *{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
+  hr{animation:none}
   hr.reveal{width:168px}
   .intro-photo img{transition:none}
   .zeno-fig,.zeno-note{display:none}

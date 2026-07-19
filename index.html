@@ -76,12 +76,26 @@ main{
 }
 
 .intro{padding:2.6rem 0 0}
+/* Greek-vase framing: a paper mat with meander friezes above and below
+   the scene, the way vase painters banded their panels */
 .intro-photo{
   border:1px solid var(--line);
   margin-bottom:.6rem;
+  padding:15px 10px;
+  background-color:#f3efe7;
+  background-image:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M0 13 H14 M0 13 V1 H13 V9 H5 V5 H9" fill="none" stroke="%239a5b3f" stroke-width="1.4" stroke-opacity=".55"/></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M0 13 H14 M0 13 V1 H13 V9 H5 V5 H9" fill="none" stroke="%239a5b3f" stroke-width="1.4" stroke-opacity=".55"/></svg>');
+  background-repeat:repeat-x,repeat-x;
+  background-position:center top 3px,center bottom 3px;
+  background-size:auto 8px,auto 8px;
+}
+.photo-well{
   overflow:hidden;
+  border:1px solid var(--line);
 }
 .intro-photo img{
+  display:block;
   width:100%;
   aspect-ratio:4/3;
   object-fit:cover;
@@ -307,6 +321,14 @@ footer{
   max-width:100%;
   max-height:100%;
   border:1px solid var(--line);
+  padding:16px 12px;
+  background-color:#f3efe7;
+  background-image:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M0 13 H14 M0 13 V1 H13 V9 H5 V5 H9" fill="none" stroke="%239a5b3f" stroke-width="1.4" stroke-opacity=".55"/></svg>'),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><path d="M0 13 H14 M0 13 V1 H13 V9 H5 V5 H9" fill="none" stroke="%239a5b3f" stroke-width="1.4" stroke-opacity=".55"/></svg>');
+  background-repeat:repeat-x,repeat-x;
+  background-position:center top 4px,center bottom 4px;
+  background-size:auto 8px,auto 8px;
 }
 
 /* entrance on load */
@@ -401,8 +423,8 @@ hr.reveal.is-visible{width:168px}
   <main>
     <section class="intro" id="top">
       <div class="intro-photo">
-        <img src="firstdayinsz.jpg" alt="Ali Guenbour, first day in Shenzhen">
-      </div>
+            <div class="photo-well"><img src="firstdayinsz.jpg" alt="Ali Guenbour, first day in Shenzhen"></div>
+          </div>
       <div class="caption">First day in Shenzhen, the city that changed the tempo</div>
 
       <h1>Ali Guenbour</h1>
@@ -515,13 +537,13 @@ hr.reveal.is-visible{width:168px}
       <div class="photo-row">
         <figure>
           <div class="intro-photo">
-            <img src="IMG-20220331-WA0012.jpg" alt="Kapachim Maroc internship">
+            <div class="photo-well"><img src="IMG-20220331-WA0012.jpg" alt="Kapachim Maroc internship"></div>
           </div>
           <figcaption>Kapachim Maroc, origin of the first industrial thesis</figcaption>
         </figure>
         <figure>
           <div class="intro-photo">
-            <img src="toubkal3.jpg" alt="Mount Toubkal">
+            <div class="photo-well"><img src="toubkal3.jpg" alt="Mount Toubkal"></div>
           </div>
           <figcaption>Toubkal, endurance showed up early</figcaption>
         </figure>
@@ -596,7 +618,7 @@ hr.reveal.is-visible{width:168px}
       <div class="photo-row" style="grid-template-columns:1fr">
         <figure>
           <div class="intro-photo" style="max-width:280px">
-            <img src="rayanmyfriend.jpg" alt="Rayan">
+            <div class="photo-well"><img src="rayanmyfriend.jpg" alt="Rayan"></div>
           </div>
           <figcaption>Rayan</figcaption>
         </figure>

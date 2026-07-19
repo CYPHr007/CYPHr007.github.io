@@ -339,6 +339,24 @@ hr.reveal.is-visible{width:168px}
   text-transform:uppercase;color:var(--muted);white-space:nowrap;
   opacity:0;transition:opacity 1.2s ease;
 }
+.zeno-sum{font-size:.72rem;letter-spacing:.06em;text-transform:none;color:var(--ink-soft)}
+.zeno-gap{font-size:.62rem;letter-spacing:.06em;text-transform:none}
+
+/* mathematics of the section */
+.math-block{
+  margin-top:1.5rem;padding:1.1rem 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  text-align:center;
+}
+.math-block .formula{
+  font-family:var(--mono);font-size:1.08rem;letter-spacing:.04em;color:var(--ink);
+}
+.math-block .gloss{
+  margin-top:.5rem;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+}
+.halving{margin-top:1.6rem}
+.halving svg{width:100%;height:auto;display:block}
 /* two-pose running stride */
 .zeno-ach .legB{opacity:0}
 .zeno-ach.running .legA{animation:strideA .46s steps(1,end) infinite}
@@ -365,6 +383,7 @@ hr.reveal.is-visible{width:168px}
         <a href="#work">HIYAL</a>
         <a href="#archive">Archive</a>
         <a href="#people">People</a>
+        <a href="#infinity">Infinity</a>
         <a href="#connect">Links</a>
       </nav>
     </div>
@@ -590,8 +609,60 @@ hr.reveal.is-visible{width:168px}
 
     <hr>
 
+    <section id="infinity">
+      <div class="kicker"><span class="knum">ΣΤ´</span>Infinity</div>
+      <h2>The race in the margin, resolved.</h2>
+      <p>
+        If you scrolled this far, you watched it happen: the tortoise ahead, Achilles behind, the gap
+        halving and halving and never closing. Zeno of Elea posed this about 2,400 years ago as an
+        argument that motion itself is impossible. To catch the tortoise, Achilles must first cover half
+        the remaining distance. Then half of what remains. Then half of that. Infinitely many steps &mdash;
+        and nobody, said Zeno, finishes infinitely many things.
+      </p>
+
+      <div class="math-block">
+        <div class="formula">&frac12; + &frac14; + &frac18; + <sup>1</sup>&frasl;<sub>16</sub> + <sup>1</sup>&frasl;<sub>32</sub> + &ctdot; = 1</div>
+        <div class="gloss">infinitely many steps &middot; a finite distance</div>
+      </div>
+
+      <figure class="halving">
+        <svg viewBox="0 0 660 78" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A unit segment divided into halves: one half, one quarter, one eighth, one sixteenth, and so on — the pieces never end, the length is one.">
+          <rect x="0.5" y="8.5" width="659" height="40" fill="none" stroke="#e3dcd0"/>
+          <rect x="0" y="8" width="330" height="41" fill="#9a5b3f" opacity=".14"/>
+          <rect x="330" y="8" width="165" height="41" fill="#9a5b3f" opacity=".24"/>
+          <rect x="495" y="8" width="82.5" height="41" fill="#9a5b3f" opacity=".34"/>
+          <rect x="577.5" y="8" width="41.25" height="41" fill="#9a5b3f" opacity=".44"/>
+          <rect x="618.75" y="8" width="41.25" height="41" fill="#9a5b3f" opacity=".58"/>
+          <text x="165" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="15" fill="#57514a">&frac12;</text>
+          <text x="412" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" fill="#57514a">&frac14;</text>
+          <text x="536" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#57514a">&frac18;</text>
+          <text x="598" y="33" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#57514a">1/16</text>
+          <text x="639" y="34" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" fill="#f7f4ee">&ctdot;</text>
+          <path d="M0 60 V56 M0 58 H660 M660 60 V56" stroke="#978f83" stroke-width="1" fill="none"/>
+          <text x="330" y="74" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="2" fill="#978f83">1</text>
+        </svg>
+        <figcaption class="caption" style="margin-top:.6rem;margin-bottom:0">Infinitely many pieces. Total length: one.</figcaption>
+      </figure>
+
+      <p>
+        The resolution is that <em>infinitely many</em> and <em>infinitely much</em> are different things.
+        The steps never end, but they shrink fast enough that they add up to something finite &mdash;
+        exactly one, not approximately. That is what infinity means here: not a place at the end of the
+        list, but the direction the list points. The sum never arrives at 1 after some final step; 1 is
+        simply the only number the partial sums crowd against. It took mathematics about two thousand
+        years to say that cleanly &mdash; the limit &mdash; and calculus, and with it most of engineering,
+        stands on that one idea.
+      </p>
+      <p>
+        I keep the race in the margin because it is quietly the job description: watching a sequence of
+        small signals converge on an event, and calling it before it arrives.
+      </p>
+    </section>
+
+    <hr>
+
     <section id="connect">
-      <div class="kicker"><span class="knum">ΣΤ´</span>Links</div>
+      <div class="kicker"><span class="knum">Ζ´</span>Links</div>
       <h2>Where to find me.</h2>
       <p>
         If you want to talk about HIYAL, manufacturing, robotics, hardware, Shenzhen, or building quickly
@@ -652,6 +723,7 @@ hr.reveal.is-visible{width:168px}
       if (!('IntersectionObserver' in window)) return;
       var groups = [
         'section .kicker, section > h2, section > p, section > .route',
+        'section > .math-block, section > .halving',
         '.list-item',
         '.photo-row figure',
         'dl.facts > div',
@@ -721,9 +793,19 @@ hr.reveal.is-visible{width:168px}
       note.className = 'zeno-note';
       note.textContent = 'Zeno: he never catches it';
 
+      // left margin: the series summing toward 1 as the reader descends
+      var sum = document.createElement('div');
+      sum.className = 'zeno-note zeno-sum';
+
+      // right margin: the remaining gap as a power of one half
+      var gapLabel = document.createElement('div');
+      gapLabel.className = 'zeno-note zeno-gap';
+
       document.body.appendChild(tor);
       document.body.appendChild(ach);
       document.body.appendChild(note);
+      document.body.appendChild(sum);
+      document.body.appendChild(gapLabel);
 
       var tx = window.innerWidth - 104, ty = window.innerHeight * 0.3;
       var axp = tx, ayp = window.innerHeight * 0.06;
@@ -760,6 +842,23 @@ hr.reveal.is-visible{width:168px}
         note.style.left = (vw - 236) + 'px';
         note.style.top = (ty + 34) + 'px';
         note.style.opacity = p > 0.86 ? '.85' : '0';
+
+        // left margin: partial sums crowding against 1
+        var partial = 1 - Math.pow(2, -5 * p);
+        sum.textContent = p > 0.97
+          ? '½ + ¼ + ⅛ + ⋯ → 1'
+          : '½ + ¼ + ⅛ + ⋯ = ' + partial.toFixed(3);
+        var leftMargin = Math.max(20, (vw - 660) / 2 - 236);
+        sum.style.left = leftMargin + 'px';
+        sum.style.top = (ty + 6) + 'px';
+        sum.style.opacity = p > 0.05 ? '.75' : '0';
+
+        // right margin: Achilles' remaining gap, halving as he goes
+        var n = Math.round(5 * p);
+        gapLabel.textContent = n >= 1 ? 'gap = 1/' + Math.pow(2, n) : '';
+        gapLabel.style.left = (axp - 74) + 'px';
+        gapLabel.style.top = (ayp + 16) + 'px';
+        gapLabel.style.opacity = (p > 0.12 && p < 0.97) ? '.7' : '0';
 
         if (!shown) { tor.style.opacity = '.62'; ach.style.opacity = '.62'; shown = true; }
         requestAnimationFrame(frame);
